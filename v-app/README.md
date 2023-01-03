@@ -53,16 +53,5 @@ Lists:
 </v-app>
 ```
 
-
-## Installation
-
-Just include the corresponding JS file and you're good:
-
-```html
-<script src="https://mavue.mavo.io/v-app/v-app.js" type="module"></script>
-```
-
-Import this before any other MaVue directives, and they will be automatically available on any `<v-app>` apps.
-
 </main>
 {% endraw %}
