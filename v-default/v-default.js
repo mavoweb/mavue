@@ -1,4 +1,4 @@
-export default {
+const vDefault = {
 	mounted(el, binding, vnode, prevVnode) {
 		let vModel = vnode.dirs[0];
 		let value = vModel.value;
@@ -21,7 +21,7 @@ export default {
 }
 
 // Get the value of a form element
-function getValue(formElement) {
+export function getValue(formElement) {
 	if (formElement.type === "checkbox") {
 		return formElement.checked;
 	}
@@ -34,11 +34,10 @@ function getValue(formElement) {
 		}
 	}
 
-
 	return formElement.value;
 }
 
-function setValue(formElement, value) {
+export function setValue(formElement, value) {
 	if (formElement.type === "checkbox") {
 		formElement.checked = value;
 	}
@@ -60,4 +59,12 @@ function setValue(formElement, value) {
 	}
 
 	formElement.dispatchEvent(event);
+}
+
+export default vDefault;
+
+let VApp = customElements.get("v-app");
+
+if (VApp) {
+	VApp.directives.default = vDefault;
 }

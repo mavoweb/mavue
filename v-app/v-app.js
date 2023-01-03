@@ -1,6 +1,4 @@
 import * as Vue from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-import vDefault from "../v-default/v-default.js";
-
 
 export default class VApp extends HTMLElement {
 	constructor() {
@@ -15,9 +13,7 @@ export default class VApp extends HTMLElement {
 				return data;
 			},
 
-			directives: {
-				default: vDefault
-			}
+			directives: Object.assign({}, VApp.directives)
 		}).mount(this)
 	}
 
@@ -36,6 +32,16 @@ export default class VApp extends HTMLElement {
 			}
 		}
 	}
+
+	// Vue instance
+	static Vue = Vue;
+
+	// Directives for every <v-app> instance
+	// Imported MaVue directives will be auto-added here
+	// but you can also add third-party directives
+	static directives = {};
 }
 
-customElements.define("v-app", VApp);
+if (!customElements.get("v-app")) {
+	customElements.define("v-app", VApp);
+}

@@ -6,7 +6,7 @@ Vue.js is a great framework: it's blazing fast, and has a large community around
 However, it requires a fair bit of JS knowledge to use.
 Even for folks with that, certain things can be cumbersome and repetitive to implement.
 
-MaVue is a modular collection of Vue helpers (mostly directives and components)
+MaVue is a modular collection of Vue helpers (mostly directives and web components)
 designed to make developing Vue.js apps
 faster and approachable to a wider audience.
 They can be used all together, or separately.
