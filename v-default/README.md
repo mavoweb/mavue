@@ -73,8 +73,8 @@ Different form elements:
 	</select>
 	<textarea v-model="textarea" v-default="'Some text'"></textarea>
 	<input type="checkbox" v-model="checkbox" v-default="true">
-	<input type="radio" value="a" v-model="radio">
-	<input type="radio" value="b" v-model="radio" v-default>
+	<input type="radio" name="radio" value="a" v-model="radio">
+	<input type="radio" name="radio" value="b" v-model="radio" v-default>
 </v-app>
 ```
 
