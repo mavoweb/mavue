@@ -1,0 +1,34 @@
+{
+  "name": "nudeui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --config postcss.config.cjs",
+    "build:html": "npx @11ty/eleventy --config=.eleventy.cjs",
+    "build": "npm run build:html && npm run build:css",
+    "watch:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --config postcss.config.cjs --watch",
+    "watch:html": "npx @11ty/eleventy --config=.eleventy.cjs --watch",
+    "watch": "npm run watch:css & npm run watch:html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mavoweb/mavue.git"
+  },
+  "keywords": [
+    "CSS",
+    "forms"
+  ],
+  "author": "Lea Verou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mavoweb/mavue/issues"
+  },
+  "homepage": "https://github.com/mavoweb/mavue#readme",
+  "devDependencies": {
+    "postcss": "^8.3.9",
+    "postcss-cli": "^9.0.1",
+    "postcss-nesting": "^8.0.1"
+  }
+}
