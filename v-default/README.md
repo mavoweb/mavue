@@ -55,11 +55,27 @@ Even cycles are not a problem!
 ```html
 <v-app data='{"list":[{"foo": 1}]}'>
 	<article v-for="(item, i) in list">
-		<input v-model="item.foo" v-default="i + 1">
+		<input v-model="item.foo" v-default="i + 1"> {{ item.foo }}
 	</article>
 	<button @click="list.push({})">Add item</button>
 </v-app>
 ```
 
+Different form elements:
+
+```html
+<v-app>
+	<input type=date v-model="date" v-default="'2019-07-02'">
+	<select v-model="select" v-default="'b'">
+		<option>a</option>
+		<option>b</option>
+		<option>c</option>
+	</select>
+	<textarea v-model="textarea" v-default="'Some text'"></textarea>
+	<input type="checkbox" v-model="checkbox" v-default="true">
+	<input type="radio" value="a" v-model="radio">
+	<input type="radio" value="b" v-model="radio" v-default>
+</v-app>
+```
 
 {% endraw %}
