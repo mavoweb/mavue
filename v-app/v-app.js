@@ -1,6 +1,6 @@
 import * as Vue from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 
-export default class VApp extends HTMLElement {
+class VApp extends HTMLElement {
 	constructor() {
 		super();
 
@@ -42,6 +42,19 @@ export default class VApp extends HTMLElement {
 	static directives = {};
 }
 
-if (!customElements.get("v-app")) {
-	customElements.define("v-app", VApp);
+async function ready() {
+	if (document.readyState === "complete") {
+		return true;
+	}
+	else {
+		return new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve));
+	}
 }
+
+if (!customElements.get("v-app")) {
+	ready().then(() => customElements.define("v-app", VApp));
+
+}
+
+export default VApp;
+globalThis.VApp = VApp;

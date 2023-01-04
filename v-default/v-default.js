@@ -63,8 +63,6 @@ export function setValue(formElement, value) {
 
 export default vDefault;
 
-let VApp = customElements.get("v-app");
-
-if (VApp) {
+if (globalThis.VApp) {
 	VApp.directives.default = vDefault;
 }
