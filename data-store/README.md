@@ -15,11 +15,20 @@ Powered by [Madata](https://madata.dev)
 
 <main>
 
+## Limitations
+
+- You **must** declare the property and set it to an object or array through `data()` (if manually creating a Vue app)
+or the `data` attribute (if using [`v-app`](../v-app/)).
+- You must never overwrite the object you passed through `:data` with another object.
+`<data-store>` relies on having a reference to it that doesn't change.
+
+## Examples
+
 Simple example (just data loading):
 
 ```html
 <v-app data='{"cats": []}'>
-	<data-store :data="cats" src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
+	<data-store v-model="cats" src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
 
 	<article v-for="cat in cats">
 		{{ cat.name }} is {{ cat.age }} years old
@@ -31,7 +40,7 @@ Example with auth and storage:
 
 ```html
 <v-app data='{"cats": []}'>
-	<data-store :data="cats" src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
+	<data-store v-model="cats" src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
 
 	<p>{{ cats?.inProgress }}</p>
 	<button @click="cats.login()">Login</button>

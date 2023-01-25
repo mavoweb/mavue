@@ -9,8 +9,10 @@ const exportOnData = [
 const DataStore = {
 	props: {
 		src: String,
-		data: Object,
+		modelValue: Object,
 	},
+
+	emits: ["update:modelValue"],
 
 	data() {
 		return {
@@ -20,12 +22,12 @@ const DataStore = {
 	},
 
 	mounted () {
-		if (!this.data || !Array.isArray(this.data) && typeof this.data !== "object") {
+		if (!this.modelValue || !Array.isArray(this.modelValue) && typeof this.modelValue !== "object") {
 			throw new Error("DataStore: data must be an object or array");
 		}
 
 		for (let property of exportOnData) {
-			this.data[property] = this[property];
+			this.modelValue[property] = this[property];
 		}
 
 		let getters = {
@@ -35,7 +37,7 @@ const DataStore = {
 		}
 
 		for (let property in getters) {
-			Object.defineProperty(this.data, property, {
+			Object.defineProperty(this.modelValue, property, {
 				get: getters[property]
 			});
 		}
@@ -58,21 +60,7 @@ const DataStore = {
 					existing: [...this.pastBackends]
 				});
 
-				let data = await this.backend.load();
-				this.user = this.backend.user;
-
-				// Replace data maintaining a reference to its object
-				if (Array.isArray(this.data)) {
-					this.data.splice(0, this.data.length, ...data);
-				}
-				else { // Object
-					// Delete old data
-					for (let key in this.data) {
-						delete this.data[key];
-					}
-					// Add new data
-					Object.assign(this.data, data);
-				}
+				return this.load();
 			},
 			immediate: true,
 		}
@@ -93,9 +81,30 @@ const DataStore = {
 			this.user = this.backend.user;
 		},
 
+		async load () {
+			let data = await this.backend.load();
+			// load() also calls login({passive: true})
+			this.user = this.backend.user;
+
+			// Replace data maintaining a reference to its object
+			if (Array.isArray(this.modelValue)) {
+				this.modelValue.splice(0, this.modelValue.length, ...data);
+			}
+			else { // Object
+				// Delete old data
+				for (let key in this.modelValue) {
+					delete this.modelValue[key];
+				}
+				// Add new data
+				Object.assign(this.modelValue, data);
+			}
+
+			this.$emit("update:modelValue", this.modelValue);
+		},
+
 		async save () {
 			this.inProgress = "Saving...";
-			let ret = await this.backend.store(this.data);
+			let ret = await this.backend.store(this.modelValue);
 			this.inProgress = "";
 			return ret;
 		},
