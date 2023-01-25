@@ -5,7 +5,7 @@ function renderDemos() {
 	for (let code of document.querySelectorAll("pre > code.language-html, pre.language-html > code")) {
 		let pre = code.parentNode;
 
-		if (!pre.previousElementSibling.matches(".demo")) {
+		if (!pre.previousElementSibling?.matches(".demo")) {
 			code.parentNode.insertAdjacentHTML("beforebegin", `<div class="demo">${code.textContent}</div>`);
 		}
 	}
