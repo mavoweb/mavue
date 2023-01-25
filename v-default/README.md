@@ -1,6 +1,7 @@
 ---
 id: v-default
 title: v-default
+type: directive
 ---
 {% raw %}
 <header>
