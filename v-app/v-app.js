@@ -13,7 +13,8 @@ class VApp extends HTMLElement {
 				return data;
 			},
 
-			directives: Object.assign({}, VApp.directives)
+			directives: Object.assign({}, VApp.directives),
+			components: Object.assign({}, VApp.components),
 		}).mount(this)
 	}
 
@@ -36,10 +37,19 @@ class VApp extends HTMLElement {
 	// Vue instance
 	static Vue = Vue;
 
-	// Directives for every <v-app> instance
-	// Imported MaVue directives will be auto-added here
-	// but you can also add third-party directives
+	/**
+	 * Directives for every <v-app> instance
+	 * Imported MaVue directives will be auto-added here
+	 * but you can also add third-party directives
+	 */
 	static directives = {};
+
+	/**
+	 * Components for every <v-app> instance
+	 * Imported MaVue components will be auto-added here
+	 * but you can also add third-party components
+	 */
+	static components = {}
 }
 
 async function ready() {
