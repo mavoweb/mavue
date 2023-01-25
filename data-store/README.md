@@ -36,6 +36,17 @@ Simple example (just data loading):
 </v-app>
 ```
 
+Example with local storage:
+
+```html
+<v-app data='{"info": {"name": "Lea Verou"}}'>
+	<data-store v-model="info" src="local:profile"></data-store>
+
+	<label>Name: <input v-model="info.name"></label>
+	<button @click="info.save()">Update</button>
+</v-app>
+```
+
 Example with auth and storage:
 
 ```html

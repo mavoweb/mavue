@@ -27,7 +27,9 @@ const DataStore = {
 		}
 
 		for (let property of exportOnData) {
-			this.modelValue[property] = this[property];
+			Object.defineProperty(this.modelValue, property, {
+				value: this[property],
+			});
 		}
 
 		let getters = {
