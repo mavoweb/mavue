@@ -47,13 +47,13 @@ Example with local storage:
 </v-app>
 ```
 
-Example with auth and storage:
+Example with authentication and storage:
 
 ```html
 <v-app data='{"cats": []}'>
 	<data-store v-model="cats" src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
 
-	<p>{{ cats?.inProgress }}</p>
+	<p>Progress: {{ cats.inProgress }}</p>
 	<button @click="cats.login()">Login</button>
 	<div mv-if="cats.user">
 		Logged in as {{ cats.user?.username }}
@@ -69,6 +69,9 @@ Example with auth and storage:
 	</article>
 </v-app>
 ```
+
+Also note that you can use `inProgress` to communicate what is happening to the user
+(it will be the empty string if nothing is happening)
 
 ## Autosave
 
