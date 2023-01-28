@@ -23,7 +23,7 @@
 
 {{ content | safe }}
 
-{% if id %}
+
 
 <section>
 
@@ -31,15 +31,25 @@
 
 <p>Just include the this JS file and you're good:
 
+{% if id %}
+
 <pre class="language-html"><code>&lt;script src="https://mavue.mavo.io/{{ id }}/{{ id }}.js" type="module">&lt;/script></code></pre>
 
 {% if id != "v-app" %}
 If you are also using <a href="../v-app"><code>&lt;v-app></code></a>, you should include that <strong>first</strong>.
 {% endif %}
 
-</section>
+{% else %}
+
+<pre class="language-html"><code>&lt;script src="https://mavue.mavo.io/mavue.js" type="module">&lt;/script></code></pre>
+
+This imports every MaVue helper. If you only need a few, you can import them individually, following the instructions on their individual pages.
 
 {% endif %}
+
+</section>
+
+
 
 <script src="{{ page | relative }}/global.js" type="module"></script>
 

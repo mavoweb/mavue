@@ -63,6 +63,10 @@ export function setValue(formElement, value) {
 
 export default vDefault;
 
+export function register (app) {
+	app.directives.default = vDefault;
+}
+
 if (globalThis.VApp) {
-	VApp.directives.default = vDefault;
+	register(VApp)
 }

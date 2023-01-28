@@ -34,9 +34,6 @@ class VApp extends HTMLElement {
 		}
 	}
 
-	// Vue instance
-	static Vue = Vue;
-
 	/**
 	 * Directives for every <v-app> instance
 	 * Imported MaVue directives will be auto-added here
@@ -50,6 +47,18 @@ class VApp extends HTMLElement {
 	 * but you can also add third-party components
 	 */
 	static components = {}
+
+	static register() {
+		if (this.registered) {
+			return;
+		}
+
+		this.registered = true;
+
+		if (!customElements.get("v-app")) {
+			customElements.define("v-app", VApp);
+		}
+	}
 }
 
 async function ready() {
@@ -61,10 +70,10 @@ async function ready() {
 	}
 }
 
-if (!customElements.get("v-app")) {
-	ready().then(() => customElements.define("v-app", VApp));
-
-}
+// Failsafe
+ready().then(() => VApp.register());
 
 export default VApp;
 globalThis.VApp = VApp;
+
+export {Vue};

@@ -124,6 +124,10 @@ const DataStore = {
 
 export default DataStore;
 
+export function register (app) {
+	app.components["data-store"] = DataStore;
+}
+
 if (globalThis.VApp) {
-	VApp.components["data-store"] = DataStore;
+	register(VApp);
 }
