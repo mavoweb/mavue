@@ -43,8 +43,7 @@ const DataStore = {
 		}
 
 		if (this.state && typeof this.state !== "object") {
-			console.log(this.state)
-			throw new TypeError("State needs to be an object if present");
+			throw new TypeError("State needs to be an object if present. Value passed was:", this.state);
 		}
 
 		let state = this.state ?? this.modelValue;
@@ -137,7 +136,16 @@ const DataStore = {
 
 			// Replace data maintaining a reference to its object
 			if (Array.isArray(this.modelValue)) {
-				this.modelValue.splice(0, this.modelValue.length, ...data);
+				// Delete existing items
+				this.modelValue.splice(0, this.modelValue.length);
+
+				// Add new items
+				if (Array.isArray(data)) {
+					this.modelValue.push(...data);
+				}
+				else if (data !== null) {
+					console.warn("DataStore: Data is not an array: ", data);
+				}
 			}
 			else { // Object
 				// Delete old data
