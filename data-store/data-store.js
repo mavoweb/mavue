@@ -10,6 +10,19 @@ const DataStore = {
 	props: {
 		src: String,
 		modelValue: Object,
+		autosave: {
+			type: [Boolean, Number, String],
+			default: false,
+			validator (value) {
+				try {
+					parseTime(value);
+					return true;
+				}
+				catch (e) {
+					return false;
+				}
+			}
+		},
 	},
 
 	emits: ["update:modelValue"],
@@ -17,6 +30,7 @@ const DataStore = {
 	data() {
 		return {
 			inProgress: "",
+			unsavedChanges: false,
 			user: null
 		}
 	},
@@ -65,16 +79,40 @@ const DataStore = {
 				return this.load();
 			},
 			immediate: true,
+		},
+
+		autosave: {
+			handler (autosave) {
+				if (autosave) {
+					this.unwatchData = this.$watch("modelValue", (newData, oldData) => {
+						if (autosave === true) {
+							// If autosave is just used without a value, we save immediately
+							this.save();
+						}
+						else {
+							let ms = parseTime(autosave);
+
+							// Throttle
+							clearTimeout(this.saveTimeout);
+							this.saveTimeout = setTimeout(() => {
+								this.save();
+							}, ms);
+						}
+					}, {deep: true});
+				}
+				else {
+					this.unwatchData?.();
+				}
+			},
+			immediate: true,
 		}
 	},
 
 	methods: {
 		async login (o) {
-			console.log("login start");
 			this.inProgress = "Logging in...";
 			await this.backend.login(o);
 			this.inProgress = "";
-			console.log(this.backend.user);
 			return this.user = this.backend.user;
 		},
 
@@ -101,6 +139,8 @@ const DataStore = {
 				Object.assign(this.modelValue, data);
 			}
 
+			this.unsavedChanges = false;
+
 			this.$emit("update:modelValue", this.modelValue);
 		},
 
@@ -108,6 +148,7 @@ const DataStore = {
 			this.inProgress = "Saving...";
 			let ret = await this.backend.store(this.modelValue);
 			this.inProgress = "";
+			this.unsavedChanges = false;
 			return ret;
 		},
 
@@ -120,6 +161,21 @@ const DataStore = {
 	},
 
 	template: " "
+}
+
+function parseTime (time) {
+	if (typeof time === "number" || typeof time === "boolean") {
+		return time;
+	}
+	else if (typeof time === "string") {
+		let match = time.trim().match(/^(?<number>\d+(\.\d+)?)\s*(?<unit>ms|s)?$/);
+
+		if (match) {
+			return match.groups.number * (match.groups.unit === "s" ? 1000 : 1)
+		}
+	}
+
+	throw new TypeError("Invalid time");
 }
 
 export default DataStore;
