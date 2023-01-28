@@ -106,6 +106,28 @@ Avoid enabling autosave when you have a lot of data, as it can slow things down 
 In those cases, you might be better off just using [event delegation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_delegation)
 (monitoring `input` and `change` events at the root and saving then).
 
+## `state` object
+
+By default, `<data-store>` hangs a bunch of methods and accessors on the data object you pass through `v-model`.
+E.g. if the data is `cats`, you will be using `cats.login()` to login,
+`cats.save()` to save, `cats.inProgress` to display the current progress etc.
+
+Even though these are not actually saved with the data, you may still wish to keep them separate.
+You can pass in another object through the `state` property for that:
+
+```html
+<v-app data='{"info": {"name": "Lea Verou"}, "state": {}}'>
+	<data-store v-model="info" :state="state" src="local:profile"></data-store>
+
+	<label>Name: <input v-model="info.name"></label>
+	<button @click="state.save()">Update</button>
+</v-app>
+```
+
+Please note you need to declare that object in your data and initialize it with an empty object,
+otherwise it will not work!
+
+
 </main>
 
 {% endraw %}

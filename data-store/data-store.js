@@ -23,6 +23,7 @@ const DataStore = {
 				}
 			}
 		},
+		state: Object
 	},
 
 	emits: ["update:modelValue"],
@@ -36,12 +37,20 @@ const DataStore = {
 	},
 
 	mounted () {
+		// TODO if we attach this when modelValue is set, we can handle cases where the data gets replaced
 		if (!this.modelValue || !Array.isArray(this.modelValue) && typeof this.modelValue !== "object") {
-			throw new Error("DataStore: data must be an object or array");
+			throw new TypeError("DataStore: data must be an object or array");
 		}
 
+		if (this.state && typeof this.state !== "object") {
+			console.log(this.state)
+			throw new TypeError("State needs to be an object if present");
+		}
+
+		let state = this.state ?? this.modelValue;
+
 		for (let property of exportOnData) {
-			Object.defineProperty(this.modelValue, property, {
+			Object.defineProperty(state, property, {
 				value: this[property],
 			});
 		}
@@ -53,7 +62,7 @@ const DataStore = {
 		}
 
 		for (let property in getters) {
-			Object.defineProperty(this.modelValue, property, {
+			Object.defineProperty(state, property, {
 				get: getters[property]
 			});
 		}
