@@ -55,7 +55,7 @@ Example with authentication and storage:
 
 	<p>Progress: {{ cats.inProgress }}</p>
 	<button @click="cats.login()">Login</button>
-	<div mv-if="cats.user">
+	<div v-if="cats.user">
 		Logged in as {{ cats.user?.username }}
 		<button @click="cats.save()">Save</button>
 		<button @click="cats.logout()">Logout</button>
