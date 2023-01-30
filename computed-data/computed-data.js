@@ -36,7 +36,7 @@ const ComputedData = {
 
 	},
 
-	template: `{{ ["number", "string", "boolean"].includes(typeof value)? value : "" }}`
+	template: `<span>{{ ["number", "string", "boolean"].includes(typeof value)? value : "" }}</span>`
 }
 
 export default ComputedData;
