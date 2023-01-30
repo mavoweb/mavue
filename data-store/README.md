@@ -1,12 +1,12 @@
 ---
 id: data-store
-title: data-store
+title: <data-store>
 type: component
 ---
 {% raw %}
 <header>
 
-# `data-store`
+# `<data-store>`
 
 Authentication, data loading & storing, uploads, on a variety of cloud services.
 Powered by [Madata](https://madata.dev)
@@ -47,19 +47,21 @@ Example with local storage:
 </v-app>
 ```
 
-Example with authentication and storage:
+More advanced example, showcasing authentication, storage, `inProgress` for feedback, passing options.
 
 ```html
 <v-app data='{"cats": []}'>
-	<data-store v-model="cats" src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
+	<data-store v-model="cats" :options="{allowForking: true}"
+		src="https://github.com/leaverou/mv-data/cats2.json"></data-store>
 
 	<p>Progress: {{ cats.inProgress }}</p>
-	<button @click="cats.login()">Login</button>
+
 	<div v-if="cats.user">
 		Logged in as {{ cats.user?.username }}
 		<button @click="cats.save()">Save</button>
 		<button @click="cats.logout()">Logout</button>
 	</div>
+	<button v-else @click="cats.login()">Login</button>
 
 	<article v-for="cat in cats">
 		<input v-model="cat.name">

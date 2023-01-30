@@ -21,29 +21,54 @@
 	<a href="https://github.com/mavoweb/mavue/tree/main/{{ id }}">GitHub</a>
 </nav>
 
-{{ content | safe }}
+{% if id and id != "v-app" %}
+<section style="font-style: italic">
+	All examples below use <a href="../v-app/"><code>&lt;v-app></code></a> as well, for clarity,
+	but you can use {{ id }} on your own VueJS apps, without <a href="../v-app/"><code>&lt;v-app></code></a>.
+</section>
+{% endif %}
 
+{{ content | safe }}
 
 
 <section>
 
 <h2 id="installation">Installation</h2>
 
-<p>Just include the this JS file and you're good:
-
 {% if id %}
 
-<pre class="language-html"><code>&lt;script src="https://mavue.mavo.io/{{ id }}/{{ id }}.js" type="module">&lt;/script></code></pre>
+	{% if id === "v-app" %}
+	<p>Just include this JS file before any other MaVue helpers and you’re good:
+	{% else %}
+	<p>If using <code>&lt;v-app></code>, all you need to do is include this JS file after it and you’re good:
 
-{% if id != "v-app" %}
-If you are also using <a href="../v-app"><code>&lt;v-app></code></a>, you should include that <strong>first</strong>.
-{% endif %}
+	{% endif %}
+
+	<pre class="language-html"><code>&lt;script src="https://mavue.mavo.io/{{ id }}/{{ id }}.js" type="module">&lt;/script></code></pre>
+
+	{% if id !== "v-app" %}
+		{% if type === "component" or type === "directive" %}
+			<p>If not using <code>&lt;v-app></code>, you can import the component individually:
+
+			<pre class="language-js"><code>
+				import {{ id | CamelCase }} from "https://mavue.mavo.io/{{ id }}/{{ id }}.js";
+
+				// Then use it in your VueJS app
+				createApp({
+					/* ... */
+					{{ type }}s: {
+						"{{ id }}": {{ id | CamelCase }}
+					}
+				}).mount("#app");
+			</code></pre>
+		{% endif %}
+	{% endif %}
 
 {% else %}
 
-<pre class="language-html"><code>&lt;script src="https://mavue.mavo.io/mavue.js" type="module">&lt;/script></code></pre>
+	<pre class="language-html"><code>&lt;script src="https://mavue.mavo.io/mavue.js" type="module">&lt;/script></code></pre>
 
-This imports every MaVue helper. If you only need a few, you can import them individually, following the instructions on their individual pages.
+	This imports every MaVue helper. If you only need a few, you can import them individually, following the instructions on their individual pages.
 
 {% endif %}
 

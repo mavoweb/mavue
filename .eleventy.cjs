@@ -37,6 +37,10 @@ module.exports = config => {
 		}
 	);
 
+	config.addFilter("CamelCase", str => {
+		return str?.replace(/(?:^|\-)([A-Za-z])/g, (g, $1) => $1.toUpperCase());
+	});
+
 	return {
 		markdownTemplateEngine: "njk",
 		templateFormats: ["md", "njk"],

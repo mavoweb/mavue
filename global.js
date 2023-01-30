@@ -1,5 +1,6 @@
 // Website scripts
 import "https://prismjs.com/prism.js";
+import "https://prismjs.com/plugins/normalize-whitespace/prism-normalize-whitespace.js";
 
 function renderDemos() {
 	for (let code of document.querySelectorAll("pre > code.language-html, pre.language-html > code")) {

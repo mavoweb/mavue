@@ -1,5 +1,5 @@
 import Backend from "https://madata.dev/src/index.js";
-
+console.log("local")
 const exportOnData = [
 	"login", "logout",
 	"save", "upload",
@@ -10,6 +10,7 @@ const DataStore = {
 	props: {
 		src: String,
 		modelValue: Object,
+		options: Object,
 		autosave: {
 			type: [Boolean, Number, String],
 			default: false,
@@ -23,7 +24,7 @@ const DataStore = {
 				}
 			}
 		},
-		state: Object
+		state: Object,
 	},
 
 	emits: ["update:modelValue"],
@@ -80,9 +81,17 @@ const DataStore = {
 					this.pastBackends.add(this.backend);
 				}
 
-				this.backend = Backend.create(url, {
-					existing: [...this.pastBackends]
-				});
+				let options = {};
+
+				if (this.pastBackends.size > 0) {
+					options.existing = [...this.pastBackends];
+				}
+
+				if (this.options) {
+					Object.assign(options, this.options);
+				}
+
+				this.backend = Backend.create(url, options);
 
 				return this.load();
 			},
