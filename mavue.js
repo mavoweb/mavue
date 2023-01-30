@@ -11,7 +11,9 @@ registerDataStore(VApp);
 registerVDefault(VApp);
 registerComputedData(VApp);
 
-VApp.register();
+// Init <v-app> asynchronously, to give other code the chance to add
+// things (methods, computed properties, components, directives etc) to it
+requestAnimationFrame(VApp.register);
 
 export {
 	VApp,
