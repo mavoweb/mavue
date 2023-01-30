@@ -13,8 +13,11 @@ class VApp extends HTMLElement {
 				return data;
 			},
 
-			directives: Object.assign({}, VApp.directives),
-			components: Object.assign({}, VApp.components),
+			computed: this.computed,
+			methods: Object.assign(this.methods ?? {}, VApp.methods),
+
+			directives: Object.assign({}, this.directives, VApp.directives),
+			components: Object.assign({}, this.components, VApp.components),
 		}).mount(this)
 	}
 
@@ -47,6 +50,11 @@ class VApp extends HTMLElement {
 	 * but you can also add third-party components
 	 */
 	static components = {}
+
+	/**
+	 * Methods for every <v-app> instance
+	 */
+	static methods = {}
 
 	static register() {
 		if (this.registered) {
