@@ -54,7 +54,11 @@ class VApp extends HTMLElement {
 	/**
 	 * Methods for every <v-app> instance
 	 */
-	static methods = {}
+	static methods = {
+		iff (test, yes, no = "") {
+			return test ? yes : no;
+		}
+	}
 
 	static register() {
 		if (VApp.registered) {
