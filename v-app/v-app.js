@@ -57,11 +57,11 @@ class VApp extends HTMLElement {
 	static methods = {}
 
 	static register() {
-		if (this.registered) {
+		if (VApp.registered) {
 			return;
 		}
 
-		this.registered = true;
+		VApp.registered = true;
 
 		if (!customElements.get("v-app")) {
 			customElements.define("v-app", VApp);
