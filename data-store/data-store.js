@@ -1,5 +1,5 @@
 import Backend from "https://madata.dev/src/index.js";
-console.log("local")
+
 const exportOnData = [
 	"login", "logout",
 	"save", "upload",
