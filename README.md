@@ -1,6 +1,8 @@
 <header>
 
-# MaVue: Easier Vue apps, inspired by Mavo
+<h1>MaVue: Easier Vue apps <small>inspired by Mavo</small></h1>
+
+
 
 Vue.js is a great framework: it's blazing fast, and has a large community around it.
 However, it requires a fair bit of JS knowledge to use.
