@@ -20,7 +20,52 @@ const SetData = {
 	},
 
 	methods: {
-		isPrimitive
+		isPrimitive,
+
+		watchValue () {
+			this.unwatchValue = this.$watch("value", (value, oldValue) => {
+				if (oldValue !== undefined) {
+					if (this.once) {
+						// You'd expect we'd never get here, since we call `unwatchValue()`
+						// but somehow this gets called once more after the unwatch.
+						this.unwatchValue?.();
+						return;
+					}
+
+					if (isPrimitive(value)) {
+						if (value === oldValue) {
+							return;
+						}
+					}
+					else {
+						console.log("slow code path")
+						if (JSON.stringify(value) === JSON.stringify(oldValue)) {
+							return;
+						}
+					}
+				}
+
+				if (this.once) {
+					this.unwatchValue?.();
+				}
+
+				this.setValue(value);
+
+				this.$emit("update", value);
+			}, {
+				immediate: true,
+				deep: true,
+			});
+		},
+
+		setValue (value) {
+			this.root[this.name] = undefined;
+			Object.defineProperty(this.root, this.name, {
+				value: value,
+				writable: true,
+				enumerable: false
+			});
+		}
 	},
 
 	computed: {
@@ -34,48 +79,20 @@ const SetData = {
 	},
 
 	created () {
-		this.unwatchValue = this.$watch("value", (value, oldValue) => {
+		this.watchValue();
+	},
 
+	mounted () {
+		if (!this.once) {
+			this.watchValue();
+		}
+	},
 
-			if (oldValue !== undefined) {
-				if (this.once) {
-					// You'd expect we'd never get here, since we call `unwatchValue()`
-					// but somehow this gets called once more after the unwatch.
-					this.unwatchValue?.();
-					return;
-				}
-
-				if (isPrimitive(value)) {
-					if (value === oldValue) {
-						return;
-					}
-				}
-				else {
-					console.log("slow code path")
-					if (JSON.stringify(value) === JSON.stringify(oldValue)) {
-						return;
-					}
-				}
-			}
-
-			if (this.once) {
-				this.unwatchValue?.();
-			}
-
-			this.root[this.name] = undefined;
-			Object.defineProperty(this.root, this.name, {
-				value: value,
-				writable: true,
-				enumerable: false
-			});
-
-			this.$emit("update", value);
-
-
-		}, {
-			immediate: true,
-			deep: true,
-		});
+	unmounted () {
+		if (!this.once) {
+			this.unwatchValue?.();
+			this.setValue(undefined);
+		}
 	},
 
 	template: `<slot><span>{{ isPrimitive(storedValue)? storedValue : "" }}</span></slot>`

@@ -101,6 +101,17 @@ Do *not* use large objects in `:value`, as it can be quite slow.
 
 </div>
 
+TBD describe this
+
+```html
+<v-app data='{"checked": true, "if_checked_1": null}'>
+	<input type="checkbox" v-model="checked">
+	<set-data name="if_checked_1" value="1" v-if="checked"></set-data>
+	<set-data name="if_checked_1" value="2" v-else></set-data>
+	<mark>{{ if_checked_1 }}</mark>
+</v-app>
+```
+
 </main>
 
 {% endraw %}
