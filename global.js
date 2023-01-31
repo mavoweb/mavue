@@ -8,6 +8,15 @@ function renderDemos() {
 
 		if (!pre.previousElementSibling?.matches(".demo")) {
 			code.parentNode.insertAdjacentHTML("beforebegin", `<div class="demo">${code.textContent}</div>`);
+
+			let demoDiv = pre.previousElementSibling;
+			let scripts = demoDiv.querySelectorAll("script");
+
+			if (scripts.length > 0) {
+				for (let script of scripts) {
+					script.replaceWith( clone(script) )
+				}
+			}
 		}
 	}
 
@@ -21,3 +30,15 @@ function renderDemos() {
 }
 
 renderDemos();
+
+function clone (node){
+	let ret = document.createElement(node.tagName);
+
+	ret.innerHTML = node.innerHTML;
+
+	for (let attr of node.getAttributeNames()) {
+		ret.setAttribute(attr, node.getAttribute(attr));
+	}
+
+	return ret;
+}

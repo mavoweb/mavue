@@ -1,6 +1,7 @@
 ---
 id: v-app
 title: <v-app>
+hasCSS: true
 ---
 {% raw %}
 <header>
@@ -52,6 +53,73 @@ Lists:
 	<button @click="list.push({foo: list.length + 1})">Add item</button>
 </v-app>
 ```
+
+## Customization
+
+Custom methods:
+
+```html
+<v-app id="sum_demo" data='{"list":[]}'>
+	Sum: {{ sum(list) }}
+	<span v-for="(n, i) in list">
+		<input v-model="list[i]" />
+	</span>
+
+	<button @click="list.push(list.length)">Add number</button>
+</v-app>
+<script>
+	// or document.querySelector("#sum_demo").methods = ...
+	sum_demo.methods = {
+		sum (numbers) {
+			return numbers.reduce((a, c) => a + +c, 0);
+		}
+	}
+</script>
+```
+
+or, alternatively, to make the `sum()` function available on *all* `<v-app>` instances:
+
+```js
+// or import { VApp } from "https://mavue.mavo.io/mavue.js" if you're using all of MaVue
+import VApp from "https://mavue.mavo.io/v-app/v-app.js";
+
+VApp.methods = {
+	sum (numbers) {
+		return numbers.reduce((a, c) => a + +c, 0);
+	}
+}
+```
+
+Please note this will not affect any `<v-app>` instances *already* created.
+
+You could also add computed properties, e.g. to compute things or expose specific globals to your Vue app:
+
+```html
+<v-app id="url_demo" data='{"relative": "../v-default/", "base": ""}'>
+	<label>Relative URL: <input v-model="relative" /></span>
+	<label>Base: <input v-model="base" /></span>
+	<output v-if="!/\w+:/.test(base)">
+		Resolved base: <a :href="absoluteBase">{{ absoluteBase }}</a>
+	</output>
+	<output>
+		Result: <a :href="new URL(relative, absoluteBase)">{{ new URL(relative, absoluteBase) }}</a>
+	</output>
+</v-app>
+<script>
+	// or document.querySelector("#url_demo").computed = ...
+	url_demo.computed = {
+		absoluteBase () {
+			return new URL(this.base, location);
+		},
+		URL () {
+			return URL;
+		}
+	}
+</script>
+```
+
+In the same way you can also add `directives` or `components` to either a `<v-app>` instance
+or all `<v-app>` instances.
 
 </main>
 {% endraw %}

@@ -12,6 +12,9 @@
 	{% if id and id != "v-app" %}
 	<script src="{{ id }}.js" type="module"></script>
 	{% endif %}
+	{% if hasCSS %}
+	<link rel="stylesheet" href="style.css" />
+	{% endif %}
 	{{ includes | safe }}
 </head>
 <body>

@@ -38,6 +38,26 @@ class VApp extends HTMLElement {
 	}
 
 	/**
+	 * Directives for this <v-app> instance
+	 */
+	directives = this.directives ?? {};
+
+	/**
+	 * Components for this <v-app> instance
+	 */
+	components = this.components ?? {};
+
+	/**
+	 * Methods for this <v-app> instance
+	 */
+	methods = this.methods ?? {};
+
+	/**
+	 * Computed properties for this <v-app> instance
+	 */
+	computed = this.computed ?? {};
+
+	/**
 	 * Directives for every <v-app> instance
 	 * Imported MaVue directives will be auto-added here
 	 * but you can also add third-party directives
@@ -59,6 +79,11 @@ class VApp extends HTMLElement {
 			return test ? yes : no;
 		}
 	}
+
+	/**
+	 * Computed properties for every <v-app> instance
+	 */
+	static computed = {}
 
 	static register() {
 		if (VApp.registered) {
