@@ -28,6 +28,6 @@ With MaVue, we want to bridge this gap, and offer developers of all skill levels
 - [`<v-app>`](./v-app/): Make Vue apps by writing HTML
 - [`<data-store>`](./data-store/): Data storage and authentication, using [Madata](https://madata.dev)
 - [`v-default`](./v-default/): Provide default values for `v-model`
-- [`<computed-data>`](./computed-data/): Name expressions and use the result in other expressions
+- [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
 
 </main>
