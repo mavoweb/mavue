@@ -16,7 +16,7 @@ Name expressions and use the result in other expressions, all from HTML!
 
 ## Examples
 
-Simple example (just data loading):
+Simple example, showing both a root-level property, and one scoped to a list item:
 
 ```html
 <v-app data='{"cats": [
@@ -35,6 +35,17 @@ Simple example (just data loading):
 	<button @click="cats.push({})">Add cat</button>
 </v-app>
 ```
+
+By default, the value will be included as contents (if it's a primitive value (string, number, boolean)),
+but you can customize how (or even if) it’s displayed:
+
+```html
+<v-app data='{"c": 25}'>
+	<input v-model="c" type="number" /> ℃ =
+	<computed-data name="f" :value="c * 1.8 + 32">{{ +f.toFixed(2) }} ℉</computed-data>
+</v-app>
+```
+
 
 </main>
 
