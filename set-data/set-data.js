@@ -11,6 +11,9 @@ const SetData = {
 			type: String
 		},
 		once: Boolean,
+		// While normal Vue attribute inheritance should take care of this for most cases,
+		// it tends to produce warnings when the element's content is not a single element
+		hidden: Boolean,
 	},
 
 	emits: ["update"],
@@ -95,7 +98,7 @@ const SetData = {
 		}
 	},
 
-	template: `<slot><span>{{ isPrimitive(storedValue)? storedValue : "" }}</span></slot>`
+	template: `<slot><span :hidden="hidden">{{ isPrimitive(storedValue)? storedValue : "" }}</span></slot>`
 }
 
 function isPrimitive (value) {
