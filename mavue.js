@@ -3,11 +3,11 @@
  */
 
 import VApp, {Vue} from "./v-app/v-app.js";
-import DataStore, { register as registerDataStore } from "./data-store/data-store.js";
+import MaData, { register as registerMaData } from "./ma-data/ma-data.js";
 import vDefault, { register as registerVDefault } from "./v-default/v-default.js";
 import SetData, { register as registerSetData } from "./set-data/set-data.js";
 
-registerDataStore(VApp);
+registerMaData(VApp);
 registerVDefault(VApp);
 registerSetData(VApp);
 
@@ -18,7 +18,7 @@ requestAnimationFrame(VApp.register);
 export {
 	VApp,
 	Vue,
-	DataStore,
+	MaData,
 	vDefault,
 	SetData,
 };

@@ -26,7 +26,7 @@ With MaVue, we want to bridge this gap, and offer developers of all skill levels
 ## MaVue helpers
 
 - [`<v-app>`](./v-app/): Make Vue apps by writing HTML
-- [`<data-store>`](./data-store/): Data storage and authentication, using [Madata](https://madata.dev)
+- [`<ma-data>`](./ma-data/): Data storage and authentication, using [Madata](https://madata.dev)
 - [`v-default`](./v-default/): Provide default values for `v-model`
 - [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
 
