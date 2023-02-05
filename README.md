@@ -42,6 +42,6 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=i
 ### Future work
 
 - `<v-editable>` to make editable elements bound to data
-- `<v-list>` to easily generate UI for lists, with drag & drop and controls to add, duplicate, or delete items
+- `<v-list>` to easily generate UI for editable lists of data, with drag & drop and controls to add, duplicate, or delete items
 
 </main>
