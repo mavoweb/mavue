@@ -32,9 +32,16 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=i
 
 ## MaVue helpers
 
+### Current
+
 - [`<v-app>`](./v-app/): Make Vue apps by writing HTML
 - [`<ma-data>`](./ma-data/): Data storage and authentication, using [Madata](https://madata.dev)
 - [`v-default`](./v-default/): Provide default values for `v-model`
 - [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
+
+### Future work
+
+- `<v-editable>` to make editable elements bound to data
+- `<v-list>` to easily generate UI for lists, with drag & drop and controls to add, duplicate, or delete items
 
 </main>
