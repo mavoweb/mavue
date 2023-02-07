@@ -107,10 +107,12 @@ function isPrimitive (value) {
 
 export default SetData;
 
-export function register (app) {
-	app.components["set-data"] = SetData;
+export const meta = {
+	type: "component",
+	name: "set-data",
+	default: SetData,
 }
 
 if (globalThis.VApp) {
-	register(VApp);
+	VApp.registerHelper(meta);
 }

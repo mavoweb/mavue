@@ -43,6 +43,15 @@ With data (provided as a JSON string):
 </v-app>
 ```
 
+Invalid data (unquoted property name):
+
+```html
+<v-app data='{foo: 2}'>
+	<input type="number" v-model="foo" />
+	sqrt({{ foo }}) = {{ Math.sqrt(foo) }}
+</v-app>
+```
+
 Lists:
 
 ```html

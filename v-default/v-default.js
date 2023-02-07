@@ -20,6 +20,8 @@ const vDefault = {
 	},
 }
 
+
+
 // Get the value of a form element
 export function getValue(formElement) {
 	if (formElement.type === "checkbox") {
@@ -63,10 +65,12 @@ export function setValue(formElement, value) {
 
 export default vDefault;
 
-export function register (app) {
-	app.directives.default = vDefault;
+export const meta = {
+	type: "directive",
+	name: "default",
+	default: vDefault
 }
 
 if (globalThis.VApp) {
-	register(VApp)
+	VApp.registerHelper(meta);
 }

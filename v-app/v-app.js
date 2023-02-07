@@ -1,4 +1,5 @@
 import * as Vue from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+import { register } from "../src/util.js";
 
 class VApp extends HTMLElement {
 	constructor() {
@@ -74,11 +75,7 @@ class VApp extends HTMLElement {
 	/**
 	 * Methods for every <v-app> instance
 	 */
-	static methods = {
-		iff (test, yes, no = "") {
-			return test ? yes : no;
-		}
-	}
+	static methods = {}
 
 	/**
 	 * Computed properties for every <v-app> instance
@@ -95,6 +92,10 @@ class VApp extends HTMLElement {
 		if (!customElements.get("v-app")) {
 			customElements.define("v-app", VApp);
 		}
+	}
+
+	static registerHelper (helper) {
+		register(VApp, helper);
 	}
 }
 

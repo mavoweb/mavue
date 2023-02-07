@@ -38,10 +38,69 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=i
 - [`<ma-data>`](./ma-data/): Data storage and authentication, using [Madata](https://madata.dev)
 - [`v-default`](./v-default/): Provide default values for `v-model`
 - [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
+- [Functions](./functions/): A set of helper functions that might be convenient in developing small data-driven applications
 
 ### Future work
 
 - `<v-editable>` to make editable elements bound to data
 - `<v-list>` to easily generate UI for editable lists of data, with drag & drop and controls to add, duplicate, or delete items
+
+{% raw %}
+<h2 id="installation">Installation</h2>
+
+### Zero hassle, no control
+
+To import all of MaVue and use it with the [`<v-app>`](./v-app/) component, all you need is this somewhere in your HTML:
+
+```html
+<script src="https://mavue.mavo.io/mavue.js" type="module"></script>
+```
+
+This imports every MaVue helper and adds it to `<v-app>`.
+
+### Minimal hassle, some control
+
+To easily create apps with MaVue in JS, you can import `createApp(spec, element)` and use it instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
+which automatically includes all MaVue helpers.
+
+In addition to calling Vue’s `createApp()` and adding all the MaVue helpers, it also:
+- allows you to provide the initial data as an object, which can be helpful if you only need to provide static data
+- calls [`.mount()`](https://vuejs.org/guide/essentials/application.html#mounting-the-app) for you and returns the Vue instance.
+
+```html
+<div id="app">
+	<input type=number v-model=foo> + 1 = {{ foo + 1 }}
+</div>
+<script type="module">
+import { createApp } from "https://mavue.mavo.io/mavue.js";
+
+let app = createApp({
+	data: {
+		foo: 1
+	}
+}, "#app");
+</script>
+```
+
+### Some hassle, more control
+
+You can also import all of MaVue on Vue apps you create in your JS, as a mixin,
+so you can use it with your own version of Vue
+
+```js
+import { createApp } from "vue";
+import { mixin } from "https://mavue.mavo.io/mavue.js";
+
+let app = createApp({
+	// ...
+}).mount("#app");
+```
+
+### More hassle, total control
+
+If you only need a few helpers, you can import them individually,
+following the instructions on their individual pages.
+
+{% endraw %}
 
 </main>

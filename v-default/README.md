@@ -21,8 +21,13 @@ Default values for `v-model`
 
 ## Examples
 
-All examples below use [`<v-app>`](../v-app) as well, for clarity,
-but the `v-default` directive does not require [`<v-app>`](../v-app).
+<div class="tip">
+
+To prevent the 'Property "foo" was accessed during render but is not defined on instance.'
+warning for root-level properties, include them in your initial data, with the value `null`
+(or `undefined` if providing data via JS).
+
+</div>
 
 Basic usage:
 
