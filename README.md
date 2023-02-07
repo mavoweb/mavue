@@ -23,7 +23,7 @@ With MaVue, we want to bridge this gap, and offer developers of all skill levels
 
 <div class="warning">
 
-**Here be dragons** Madata has not yet been officially released,
+**Here be dragons** MaVue has not yet been officially released,
 nor is the list of helpers below complete.
 It is very much a work in progress.
 Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) as you find them!
