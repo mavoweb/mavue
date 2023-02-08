@@ -5,26 +5,26 @@
  */
 export function register(app, ...helpers) {
 	for (let helper of helpers) {
-		let meta = helper.meta;
+		let meta = helper.meta ?? helper;
 
-		if (meta?.type === "component") {
+		if (meta.type === "component") {
 			app.components ??= {};
 			app.components[meta.name] = meta.default;
 		}
-		else if (meta?.type === "directive") {
+		else if (meta.type === "directive") {
 			app.directives ??= {};
 			app.directives[meta.name] = meta.default;
 		}
-		else if (meta?.type === "mixin") {
+		else if (meta.type === "mixin") {
 			app.mixins ??= [];
 			app.mixins.push(meta.default);
 		}
 		else { // helper functions
 			app.methods ??= {};
 
-			if (meta?.default ?? helper.default) {
+			if (meta.default) {
 				// Default export of object with functions as keys
-				Object.assign(app.methods, meta?.default ?? helper.default);
+				Object.assign(app.methods, meta.default);
 			}
 			else {
 				// Methods exported as individual named exports
