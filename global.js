@@ -6,17 +6,51 @@ function renderDemos() {
 	for (let code of document.querySelectorAll("pre > code.language-html, pre.language-html > code")) {
 		let pre = code.parentNode;
 
-		if (!pre.previousElementSibling?.matches(".demo")) {
+		if (!pre.previousElementSibling?.matches(".demo, .no-demos *")) {
 			code.parentNode.insertAdjacentHTML("beforebegin", `<div class="demo">${code.textContent}</div>`);
 
+			// Ensure scripts actually run
 			let demoDiv = pre.previousElementSibling;
+			let styles = pre.nextElementSibling?.matches("style")? pre.nextElementSibling : null;
 			let scripts = demoDiv.querySelectorAll("script");
 
-			if (scripts.length > 0) {
-				for (let script of scripts) {
-					script.replaceWith( clone(script) )
-				}
+			for (let script of scripts) {
+				script.replaceWith( clone(script) )
 			}
+
+			// Create "Open in CodePen" button
+
+			// Dummy so we can get outerHTML
+			let dummy = document.createElement("div");
+
+			// Additional includes
+			let head = [...document.head.querySelectorAll("script")].map(script => {
+				let script2 = clone(script);
+				// Absolutize href
+				if (script.hasAttribute("src")) {
+					let src = new URL(script.src, location);
+					if (src.host.startsWith("localhost")) {
+						src.host = "mavue.mavo.io:80";
+						src.protocol = "https:";
+					}
+					script2.setAttribute("src", src);
+				}
+
+				dummy.append(script2);
+
+				return script2.outerHTML;
+			}).join("\n");
+			let options = {
+				title: "MaVue Demo",
+				html: code.textContent,
+				css: styles?.textContent,
+				head
+			}
+			demoDiv.insertAdjacentHTML("afterend", `<form action="https://codepen.io/pen/define" method="POST" target="_blank" class="codepen">
+				<input type="hidden" name="data" value='${ JSON.stringify(options).replaceAll("'", "&apos;") }'>
+				<button>Open in <img src="/assets/codepen.svg" alt="CodePen"></button>
+			</form>`);
+
 		}
 	}
 

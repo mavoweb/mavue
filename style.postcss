@@ -22,6 +22,7 @@
 	--font-mono: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 
 	--page-width: 900px;
+	--page-margin: clamp(1em, 50vw - var(--page-width) / 2, 50vw);
 }
 
 body {
@@ -34,7 +35,7 @@ body {
 
 body > * {
 	order: 10;
-	padding: 1em clamp(1em, 50vw - var(--page-width) / 2, 50vw);
+	padding: 1em var(--page-margin);
 
 	&:is(header) {
 		order: 0;
@@ -256,4 +257,19 @@ button {
 	--label: "Tip";
 	--color-hs: var(--color-green-hs);
 	--color: var(--color-green);
+}
+
+form.codepen {
+	position: absolute;
+	right: calc(var(--page-margin) - 1em);
+
+	& button {
+		white-space: normal;
+		padding: .5em .6em;
+
+		& img {
+			display: block;
+			margin-top: .2em;
+		}
+	}
 }

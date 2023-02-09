@@ -126,6 +126,27 @@ You could also add computed properties, e.g. to compute things or expose specifi
 	}
 </script>
 ```
+<style>
+#url_demo {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: .5em 1em;
+	border: 1px solid hsl(220 10% 90%);
+	background:hsl(220 10% 98%);
+	padding: .5em;
+	margin: 1em 0;
+}
+
+	#url_demo label,
+	#url_demo output {
+		display: contents;
+	}
+
+	#url_demo a {
+		font-weight: bold;
+	}
+
+</style>
 
 In the same way you can also add `directives` or `components` to either a `<v-app>` instance
 or all `<v-app>` instances.

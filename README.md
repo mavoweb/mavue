@@ -50,7 +50,7 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=i
 
 ### Zero hassle, no control
 
-To import all of MaVue and use it with the [`<v-app>`](./v-app/) component, all you need is this somewhere in your HTML:
+To import all of MaVue and use it with the [`<v-app>`](./v-app/) custom element, all you need is this somewhere in your HTML:
 
 ```html
 <script src="https://mavue.mavo.io/mavue.js" type="module"></script>
@@ -60,7 +60,7 @@ This imports every MaVue helper and adds it to `<v-app>`.
 
 ### Minimal hassle, some control
 
-To easily create apps with MaVue in JS, you can import `createApp(spec, element)` and use it instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
+To easily create (Ma)Vue apps in JS, you can import `createApp(spec, element)` and use it instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
 which automatically includes all MaVue helpers.
 
 In addition to calling Vue’s `createApp()` and adding all the MaVue helpers, it also:
