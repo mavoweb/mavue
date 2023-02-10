@@ -1,5 +1,6 @@
 let markdownIt = require("markdown-it");
 let markdownItAnchor = require("markdown-it-anchor");
+let markdownItAttrs = require('markdown-it-attrs');
 
 module.exports = config => {
 	let data = {
@@ -25,6 +26,7 @@ module.exports = config => {
 	config.setLibrary("md", markdownIt({
 			html: true,
 		})
+		.use(markdownItAttrs)
 		.use(markdownItAnchor, {
 			permalink: markdownItAnchor.permalink.headerLink(),
 			level: 2,

@@ -16,7 +16,7 @@ A bunch of convenient helper functions for working with data
 
 ## The functions
 
-### iff(test, iftrue [, iffalse])
+### iff(test, iftrue [, iffalse]) { #iff }
 
 More readable than a ternary, and the third optional argument defaults to `""` which is helpful for output.
 
@@ -27,7 +27,7 @@ More readable than a ternary, and the third optional argument defaults to `""` w
 </v-app>
 ```
 
-### get(object, propertyPath)
+### get(object, propertyPath) { #get }
 
 Get a deeply nested property path without `map()` etc.
 Will always return a flat array of values, not nested arrays etc.
@@ -48,7 +48,7 @@ Forgiving: if any part doesn't exist, it just returns null.
 </v-app>
 ```
 
-### sum(...numbers)
+### sum(...numbers) { #sum }
 
 Sum one or more arrays of numbers
 
@@ -61,7 +61,7 @@ Sum one or more arrays of numbers
 </v-app>
 ```
 
-### count(...values)
+### count(...values) { #count }
 
 Count truthy values in one or more arrays
 
