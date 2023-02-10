@@ -109,13 +109,37 @@ nav {
 	}
 }
 
-md-block {
-	display: contents;
-}
-
 code, pre {
 	font-family: var(--font-mono);
 }
+
+h1, h2, h3, h4, h5, h6 {
+	position: relative;
+
+	& > a:only-child { /* Permalinks */
+		color: inherit;
+		font: inherit;
+		text-decoration-color: var(--color-blue);
+
+		&::before {
+			content: "#";
+			position: absolute;
+			right: calc(100% + .3em);
+			transform: .4s opacity;
+			color: var(--color-blue);
+		}
+
+		&:not(:hover, :focus) {
+			text-decoration: none;
+
+			&::before {
+				opacity: 0;
+			}
+		}
+	}
+}
+
+/* Form elements */
 
 button, input, textarea, select {
 	font: inherit;
