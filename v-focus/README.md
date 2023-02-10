@@ -32,7 +32,9 @@ Basic usage, element is focused when inserted:
 </v-app>
 ```
 
-Focus element based on data:
+You can also set focusabiity based on a data value.
+When the data value becomes truthy, the element will be focused.
+When the data value becomes falsy, it will be unfocused (if it's focused).
 
 ```html
 <v-app data='{"list":[{}]}'>
@@ -45,5 +47,12 @@ Focus element based on data:
 	<button @click="list.push({active: true})">Add item</button>
 </v-app>
 ```
+
+<div class=note>
+
+These actions only happen when the value changes from truthy to falsy or vice versa,
+e.g. changing from `"foo"` to `1` has no effect, because both values are truthy.
+
+</div>
 
 {% endraw %}
