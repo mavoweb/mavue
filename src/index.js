@@ -25,7 +25,7 @@ register(VApp, vDefaultAll);
 register(mixin, vDefaultAll);
 export {vDefault};
 
-import focus, * as focusAll from "../v-default/v-default.js";
+import focus, * as focusAll from "../v-focus/v-focus.js";
 register(VApp, focusAll);
 register(mixin, focusAll);
 export {focus};

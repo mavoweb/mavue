@@ -8,18 +8,24 @@
 	<link rel="icon" href="{{ page | relative }}/logo.svg">
 	<link rel="stylesheet" href="{{ page | relative }}/style.css" />
 
-	<script src="../v-app/v-app.js" type="module"></script>
-	{% if type === "functions" %}
-	<script type="module">
-		import * as {{ id | CamelCase }} from "./{{ id }}.js";
-		VApp.registerHelper({{ id | CamelCase }});
-	</script>
-	{% elseif id and id != "v-app" %}
-	<script src="{{ id }}.js" type="module"></script>
+
+	{% if not id %}
+	<script src="mavue.js" type="module"></script>
+	{% else %}
+		<script src="../v-app/v-app.js" type="module"></script>
+		{% if type === "functions" %}
+		<script type="module">
+			import * as {{ id | CamelCase }} from "./{{ id }}.js";
+			VApp.registerHelper({{ id | CamelCase }});
+		</script>
+		{% elseif id != "v-app" %}
+		<script src="{{ id }}.js" type="module"></script>
+		{% endif %}
+		{% if hasCSS %}
+		<link rel="stylesheet" href="style.css" />
+		{% endif %}
 	{% endif %}
-	{% if hasCSS %}
-	<link rel="stylesheet" href="style.css" />
-	{% endif %}
+
 	{{ includes | safe }}
 </head>
 <body>
