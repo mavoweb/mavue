@@ -38,13 +38,13 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=i
 - [`<ma-data>`](./ma-data/): Data storage and authentication, using [Madata](https://madata.dev)
 - [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
 - [`v-default`](./v-default/): Provide default values for `v-model`
-- [`v-focus`](./v-focus/): Focus elements when they are inserted
+- [`v-focus`](./v-focus/): Focus elements when they are inserted or when data changes
 - [Functions](./functions/): A set of helper functions convenient in developing small data-driven applications
 
 ### Future work
 
 - `<v-editable>` to make editable elements bound to data
-- `<v-list>` to easily generate UI for editable lists of data, with drag & drop and controls to add, duplicate, or delete items
+- `<v-list>` to easily generate UI for editable lists of data, with drag & drop, controls to add, duplicate, or delete items, and keyboard navigation
 
 {% raw %}
 <h2 id="installation">Installation</h2>
