@@ -61,6 +61,22 @@ Sum one or more arrays of numbers
 </v-app>
 ```
 
+### count(...values)
+
+Count truthy values in one or more arrays
+
+```html
+<v-app data='{
+	"list": [0, "", "hello", true, false]
+}'>
+	{{ count(list) }} values
+	<div v-for="(item, i) in list">
+		<input v-model="list[i]">
+	</div>
+	<button @click="list.push(list.length + 1)">Add more</button>
+</v-app>
+```
+
 </main>
 
 {% endraw %}

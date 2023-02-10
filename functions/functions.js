@@ -49,7 +49,8 @@ export function get (object, path) {
 }
 
 /**
- * Sum one or more arrays of numbers
+ * Sum one or more arrays of numbers.
+ * Non-numerical values are silently dropped.
  * @param  {...any} numbers
  */
 export function sum (...numbers) {
@@ -63,4 +64,21 @@ export function sum (...numbers) {
 			return acc;
 		}
 	}, 0);
+}
+
+/**
+ * Count the number of truthy values in one or more arrays
+ * @param  {...any} values
+ */
+export function count (...values) {
+	values = values.flat();
+	let count = 0;
+
+	for (let value of values) {
+		if (value) {
+			count++;
+		}
+	}
+
+	return count;
 }
