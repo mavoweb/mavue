@@ -15,15 +15,20 @@ register(VApp, MaDataAll);
 register(mixin, MaDataAll);
 export {MaData};
 
+import SetData, * as SetDataAll from "../set-data/set-data.js";
+register(VApp, SetDataAll);
+register(mixin, SetDataAll);
+export {SetData};
+
 import vDefault, * as vDefaultAll from "../v-default/v-default.js";
 register(VApp, vDefaultAll);
 register(mixin, vDefaultAll);
 export {vDefault};
 
-import SetData, * as SetDataAll from "../set-data/set-data.js";
-register(VApp, SetDataAll);
-register(mixin, SetDataAll);
-export {SetData};
+import focus, * as focusAll from "../v-default/v-default.js";
+register(VApp, focusAll);
+register(mixin, focusAll);
+export {focus};
 
 import * as functions from "../functions/functions.js";
 register(VApp, functions);

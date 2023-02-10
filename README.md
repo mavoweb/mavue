@@ -36,9 +36,10 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=i
 
 - [`<v-app>`](./v-app/): Make Vue apps by writing HTML
 - [`<ma-data>`](./ma-data/): Data storage and authentication, using [Madata](https://madata.dev)
-- [`v-default`](./v-default/): Provide default values for `v-model`
 - [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
-- [Functions](./functions/): A set of helper functions that might be convenient in developing small data-driven applications
+- [`v-default`](./v-default/): Provide default values for `v-model`
+- [`v-focus`](./v-focus/): Focus elements when they are inserted
+- [Functions](./functions/): A set of helper functions convenient in developing small data-driven applications
 
 ### Future work
 
