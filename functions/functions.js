@@ -58,7 +58,7 @@ export function sum (...numbers) {
 
 	return numbers.reduce((acc, current) => {
 		if (!isNaN(current)) {
-			return acc + current;
+			return acc + Number(current);
 		}
 		else {
 			return acc;
