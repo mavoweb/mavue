@@ -45,6 +45,10 @@ export function get (object, path) {
 		}
 	}
 
+	if (Array.isArray(obj)) {
+		return obj.flat();
+	}
+
 	return obj;
 }
 
