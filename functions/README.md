@@ -2,6 +2,7 @@
 id: functions
 title: MaVue Helper Functions
 type: functions
+hasTests: true
 ---
 {% raw %}
 <header>
