@@ -1,4 +1,5 @@
 index.html
+!**/tests/index.html
 *.css
 # Local Netlify folder
 .netlify
