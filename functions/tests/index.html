@@ -120,6 +120,15 @@
 				<td>get([1, [2, 3]], 1)</td>
 				<td>[2, 3]</td>
 			</tr>
+			<tr data-error>
+				<td>get({foo: true}, "foo == true")</td>
+				<td>TypeError</td>
+			</tr>
+			</tr>
+			<tr>
+				<td>get({foo: true}, ["foo == true"])</td>
+				<td>undefined</td>
+			</tr>
 		</table>
 	</section>
 

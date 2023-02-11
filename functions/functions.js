@@ -12,7 +12,14 @@ export function iff (test, yes, no = "") {
  */
 export function get (object, path) {
 	if (typeof path === "string") {
+		// Produce error if path doesn’t seem to match format
 		path = path.split(".");
+
+		if (!path.every(prop => /^([$\w]+|\*)$/.test(prop))) {
+			throw new TypeError(`Invalid property path: ${path.join(".")}.
+			Property paths must be dot-separated strings of alphanumeric characters, dollar signs ($), or a single asterisk (*).
+			If you have an object with weird keys, use the array path syntax instead, which does not perform this check`);
+		}
 	}
 
 	let obj = object;
@@ -30,12 +37,20 @@ export function get (object, path) {
 			}
 		}
 		else {
-			// If array, get all child properties
-			// If object, just get property
 			if (Array.isArray(obj)) {
-				obj = obj.flatMap(item => item?.[prop]);
+				if (/^\d+$/.test(prop)) {
+					// Get item by index
+
+					obj = obj[prop];
+				}
+				else {
+					// Get all child properties
+					obj = obj.flatMap(item => item?.[prop]);
+				}
+
 			}
 			else {
+				// Just get property, if it exists
 				obj = obj?.[prop];
 			}
 		}
