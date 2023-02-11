@@ -22,6 +22,10 @@ export function get (object, path) {
 		}
 	}
 
+	if (!Array.isArray(path)) {
+		path = [path];
+	}
+
 	let obj = object;
 
 	for (let i = 0; i < path.length; i++) {
