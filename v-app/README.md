@@ -80,7 +80,7 @@ Custom methods:
 	// or document.querySelector("#sum_demo").methods = ...
 	sum_demo.methods = {
 		sum (numbers) {
-			return numbers.reduce((a, c) => a + c, 0);
+			return numbers.reduce((a, c) => a + +c, 0);
 		}
 	}
 </script>
@@ -94,7 +94,7 @@ import VApp from "https://mavue.mavo.io/v-app/v-app.js";
 
 VApp.methods = {
 	sum (numbers) {
-		return numbers.reduce((a, c) => a + c, 0);
+		return numbers.reduce((a, c) => a + +c, 0);
 	}
 }
 ```
