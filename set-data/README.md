@@ -43,7 +43,7 @@ but you can customize how (or even if) it’s displayed:
 ```html
 <v-app data='{"c": 25}'>
 	<input v-model="c" type="number" /> ℃ =
-	<set-data name="f" :value="c * 1.8 + 32">{{ +f.toFixed(2) }} ℉</set-data>
+	<set-data name="f" :value="c * 1.8 + 32">{{ f.toFixed(2) }} ℉</set-data>
 </v-app>
 ```
 
@@ -81,7 +81,7 @@ e.g. this produces an error when you click "Add window" due to `win.size` not ex
 		<set-data name="size" :on="win" :value="{width: 0, height: 0}" once></set-data>
 
 		<input type="number" v-model="win.size.width" />
-		&times;
+		×
 		<input type="number" v-model="win.size.height" />
 	</article>
 	<button @click="windows.push({})">Add window</button>
