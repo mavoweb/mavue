@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Function tests</title>
+	<link rel="stylesheet" href="https://htest.dev/htest.css" crossorigin />
+	<script src="https://htest.dev/htest.js" crossorigin></script>
+</head>
+
+<body>
+	<h1>Function tests</h1>
+
+	<p>These tests test whether MaVue helper functions produce correct results.</p>
+
+	<section>
+		<h1>iff()</h1>
+
+		<table class="reftest" data-test="functionEvaluation" data-columns="3">
+			<tr>
+				<td>iff(4, 1, 2)</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>iff(0, 1, 2)</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>iff([], 1, 2)</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>iff("", 1, 2)</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>iff(4 > 2, 1, 2)</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>iff("foo".length, 1, 2)</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>iff(true, 1)</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>iff(isNaN(42), 1)</td>
+				<td>""</td>
+			</tr>
+		</table>
+	</section>
+
+	<section>
+		<h1>get()</h1>
+
+		<table class="reftest" data-test="functionEvaluation" data-columns="3">
+			<tr>
+				<td>get({foo: 4}, "foo")</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>get({foo: 4}, "bar")</td>
+				<td>undefined</td>
+			</tr>
+			<tr>
+				<td>get([{foo: "fooname"}, {bar: "barname"}], "foo")</td>
+				<td>["fooname", null]</td>
+			</tr>
+			<tr>
+				<td>get([{foo: "fooname"}, {bar: "barname"}], "baz")</td>
+				<td>[null, null]</td>
+			</tr>
+			<tr>
+				<td>get([{id: "foo", name: "fooname"}, {id: "bar", name: "barname"}], "name")</td>
+				<td>["fooname", "barname"]</td>
+			</tr>
+			<tr>
+				<td>get({bar: [1,2,3]}, "*")
+				</td>
+				<td>[1,2,3]</td>
+			</tr>
+			<tr>
+				<td>get({bar: [{foo: 1}, {foo: 2}, {foo: 3}]}, "*")
+				</td>
+				<td>[{"foo": 1}, {"foo": 2}, {"foo": 3}]</td>
+			</tr>
+			<tr>
+				<td>get({bar: [{foo: 1}, {foo: 2}, {foo: 3}]}, "bar.*.foo")
+				</td>
+				<td>[1,2,3]</td>
+			</tr>
+			<tr>
+				<td>get({bar: [{foo: 1}, {foo: 2}, {foo: 3}]}, "*.foo")
+				</td>
+				<td>[null]</td>
+			</tr>
+			<tr>
+				<td>get({bar: [{foo: 1}, {foo: 2}, {foo: 3}]}, "bar.*")
+				</td>
+				<td>[{"foo": 1}, {"foo": 2}, {"foo": 3}]</td>
+			</tr>
+			<tr>
+				<td>get([{id: "foo", name: "fooname"}, {id: "bar", name: "barname"}], ["id"])</td>
+				<td>["foo", "bar"]</td>
+			</tr>
+			<tr>
+				<td>get({bar: [{foo: 1}, {foo: 2}, {foo: 3}]}, ["bar", "*", "foo"])
+				</td>
+				<td>[1, 2, 3]</td>
+			</tr>
+			<tr>
+				<td>get([1, 2, 3], 1)</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>get([1, [2, 3]], 1)</td>
+				<td>[2, 3]</td>
+			</tr>
+			<tr data-error>
+				<td>get({foo: true}, "foo == true")</td>
+				<td>TypeError</td>
+			</tr>
+			</tr>
+			<tr>
+				<td>get({foo: true}, ["foo == true"])</td>
+				<td>undefined</td>
+			</tr>
+		</table>
+	</section>
+
+	<section>
+		<h1>sum()</h1>
+
+		<table class="reftest" data-test="functionEvaluation" data-columns="3">
+			<tr>
+				<td>sum(1, 2, 3)</td>
+				<td>6</td>
+			</tr>
+			<tr title="Non-numerical values">
+				<td>sum("", " ", "foo", false, null, undefined, [], {}, NaN)</td>
+				<td>0</td>
+			</tr>
+			<tr title="With 1 empty array">
+				<td>sum([])</td>
+				<td>0</td>
+			</tr>
+			<tr title="With 1 array">
+				<td>sum([1, 2, 3])</td>
+				<td>6</td>
+			</tr>
+			<tr title="With 1 array with non-numerical values">
+				<td>sum([1, "foo", 2, false, 3, undefined])</td>
+				<td>6</td>
+			</tr>
+			<tr title="With empty arrays">
+				<td>sum([], [])</td>
+				<td>0</td>
+			</tr>
+			<tr title="With arrays">
+				<td>sum([1, 2, 3], [-1, -2, -3])</td>
+				<td>0</td>
+			</tr>
+			<tr title="With arrays with non-numerical values">
+				<td>sum([1, "foo", 2, false, 3, undefined], [null, -1, -2, -3, {}])</td>
+				<td>0</td>
+			</tr>
+			<tr title="With arrays and numbers">
+				<td>sum(-5, [1, 2], 3, [4, 5])</td>
+				<td>10</td>
+			</tr>
+			<tr title="With arrays, numbers, and non-numerical values">
+				<td>sum(-5, [1, 2], false, 3, [4, "", 5], null)</td>
+				<td>10</td>
+			</tr>
+			<tr title="Nested arrays should be ignored">
+				<td>sum([1, 2, [3, 4, "foo", null], 3, [4, 5]])</td>
+				<td>6</td>
+			</tr>
+		</table>
+	</section>
+
+	<section>
+		<h1>count()</h1>
+
+		<table class="reftest" data-test="functionEvaluation" data-columns="3">
+			<tr>
+				<td>count("", " ", "foo", false, true, null, undefined, [], {}, NaN)</td>
+				<td>4</td>
+			</tr>
+			<tr title="With 1 array">
+				<td>count([1, "foo", 2, false, 3, undefined, true])</td>
+				<td>5</td>
+			</tr>
+			<tr title="With arrays">
+				<td>count([1, "foo", 2, false, 3, undefined], [null, -1, -2, -3, {}])</td>
+				<td>8</td>
+			</tr>
+			<tr title="With arrays, numbers, and non-numerical values">
+				<td>count(-5, [1, 2, {}], false, 3, [4, "", 5], null)</td>
+				<td>7</td>
+			</tr>
+			<tr title="Nested arrays should be treated as 1">
+				<td>count([2, [3, "foo", null], [3, [4, 5]]])</td>
+				<td>3</td>
+			</tr>
+		</table>
+	</section>
+
+	<script type="module">
+		import * as Functions from "../functions.js";
+
+		function functionEvaluation (test, result, expected) {
+			let r = eval(test.textContent);
+			let json = JSON.stringify(r);
+			result.textContent = json;
+
+			let err;
+
+			try {
+				let evaluated = eval(expected.textContent);
+
+				if (Test.equals(r, evaluated)) {
+					return true;
+				}
+			}
+			catch (e) { err = e }
+
+			try {
+				let stringified = JSON.stringify(JSON.parse(expected.textContent));
+
+				if (json === stringified) {
+					return true;
+				}
+			}
+			catch (e) { err = e }
+
+			return err || false;
+		}
+
+		Object.assign(globalThis, { ...Functions, functionEvaluation });
+	</script>
+</body>
+
+</html>
