@@ -3,3 +3,5 @@ index.html
 *.css
 # Local Netlify folder
 .netlify
+
+node_modules/
