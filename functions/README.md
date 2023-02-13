@@ -49,6 +49,8 @@ Forgiving: if any part doesn't exist, it just returns null.
 </v-app>
 ```
 
+* [More `get()` examples](./tests/#get)
+
 ### sum(...numbers) { #sum }
 
 Sum one or more arrays of numbers
@@ -61,6 +63,8 @@ Sum one or more arrays of numbers
 	<button @click="list.push(list.length + 1)">Add more</button>
 </v-app>
 ```
+
+* [More `sum()` examples](./tests/#sum)
 
 ### count(...values) { #count }
 
@@ -77,6 +81,48 @@ Count truthy values in one or more arrays
 	<button @click="list.push(list.length + 1)">Add more</button>
 </v-app>
 ```
+
+* [More `count()` examples](./tests/#count)
+
+### average(...numbers) { #average }
+### median(...numbers) { #median }
+
+Calculate the average/median of one or more arrays of numbers.
+
+```html
+<v-app data='{
+	"list": [1, 2, 30]
+}'>
+	<p><label>Numbers:
+		<input type="number" v-for="(n, i) of list" v-model="list[i]"></label>
+		<button @click="list.push(list.length + 1)">Add more</button>
+	<p>Average is <strong>{{ average(list) }}</strong>, median is <strong>{{ median(list) }}</strong>
+
+</v-app>
+```
+
+* [More `average()` examples](./tests/#average)
+* [More `median()` examples](./tests/#median)
+
+### min(...numbers) { #min }
+### max(...numbers) { #max }
+
+Calculate the average/median of one or more arrays of numbers.
+
+```html
+<v-app data='{
+	"list": [-1, 30, 2]
+}'>
+	<p><label>Numbers:
+		<input type="number" v-for="(n, i) of list" v-model="list[i]"></label>
+		<button @click="list.push(list.length + 1)">Add more</button>
+	<p>Min is <strong>{{ min(list) }}</strong>, max is <strong>{{ max(list) }}</strong>
+
+</v-app>
+```
+
+* [More `min()` examples](./tests/#min)
+* [More `max()` examples](./tests/#max)
 
 </main>
 

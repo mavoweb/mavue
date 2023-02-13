@@ -71,6 +71,10 @@ export function get (object, path) {
 	return obj;
 }
 
+function getNumbers(arr) {
+	return arr.filter(item => !isNaN(item)).map(item => Number(item));
+}
+
 /**
  * Sum one or more arrays of numbers.
  * Non-numerical values are silently dropped.
@@ -78,15 +82,63 @@ export function get (object, path) {
  */
 export function sum (...numbers) {
 	numbers = numbers.flat();
+	numbers = getNumbers(numbers);
+	return numbers.reduce((acc, current) => acc + current, 0);
+}
 
-	return numbers.reduce((acc, current) => {
-		if (!isNaN(current)) {
-			return acc + Number(current);
-		}
-		else {
-			return acc;
-		}
-	}, 0);
+/**
+ * Average of one or more arrays of numbers.
+ * Non-numerical values are silently dropped.
+ * @param  {...any} numbers
+ */
+export function average (...numbers) {
+	numbers = numbers.flat();
+	numbers = getNumbers(numbers);
+
+	return sum(numbers) / numbers.length;
+}
+
+/**
+ * Median of one or more arrays of numbers.
+ * Non-numerical values are silently dropped.
+ * @param  {...any} numbers
+ */
+export function median (...numbers) {
+	numbers = numbers.flat();
+	numbers = getNumbers(numbers);
+
+	numbers = numbers.sort((a, b) => a - b);
+
+	if (numbers.length % 2 === 1) {
+		return numbers[(numbers.length - 1) / 2];
+	}
+	else {
+		return (numbers[numbers.length / 2 - 1] + numbers[numbers.length / 2]) / 2;
+	}
+}
+
+/**
+ * Get the minimum value of one or more arrays of numbers.
+ * Non-numerical values are silently dropped.
+ * @param  {...any} numbers
+ * @returns {number}
+ */
+export function min (...numbers) {
+	numbers = numbers.flat();
+	numbers = getNumbers(numbers);
+	return Math.min(...numbers);
+}
+
+/**
+ * Get the maximum value of one or more arrays of numbers.
+ * Non-numerical values are silently dropped.
+ * @param  {...any} numbers
+ * @returns {number}
+ */
+export function max (...numbers) {
+	numbers = numbers.flat();
+	numbers = getNumbers(numbers);
+	return Math.max(...numbers);
 }
 
 /**
