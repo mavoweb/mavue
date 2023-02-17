@@ -35,6 +35,20 @@ function renderDemos() {
 					}
 					script2.setAttribute("src", src);
 				}
+				else if (script.type === "module") {
+					let content = script.textContent;
+					let re = /import\s+.*\s+from\s+\"(?<url>.+)\"/gm;
+					for (const match of content.matchAll(re)) {
+						let url = match.groups.url;
+						let src = new URL(url, location);
+						if (src.host.startsWith("localhost")) {
+							src.host = "mavue.mavo.io:80";
+							src.protocol = "https:";
+						}
+						content = content.replace(url, src);
+					}
+					script2.textContent = content;
+				}
 
 				dummy.append(script2);
 
