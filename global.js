@@ -28,26 +28,7 @@ function renderDemos() {
 				let script2 = clone(script);
 				// Absolutize href
 				if (script.hasAttribute("src")) {
-					let src = new URL(script.src, location);
-					if (src.host.startsWith("localhost")) {
-						src.host = "mavue.mavo.io:80";
-						src.protocol = "https:";
-					}
-					script2.setAttribute("src", src);
-				}
-				else if (script.type === "module") {
-					let content = script.textContent;
-					let re = /import\s+.*\s+from\s+\"(?<url>.+)\"/gm;
-					for (const match of content.matchAll(re)) {
-						let url = match.groups.url;
-						let src = new URL(url, location);
-						if (src.host.startsWith("localhost")) {
-							src.host = "mavue.mavo.io:80";
-							src.protocol = "https:";
-						}
-						content = content.replace(url, src);
-					}
-					script2.textContent = content;
+					script2.setAttribute("src", fix(script.src));
 				}
 
 				dummy.append(script2);
@@ -58,8 +39,8 @@ function renderDemos() {
 				title: "MaVue Demo",
 				html: code.textContent,
 				css: styles?.textContent,
-				head
-			}
+				head: `<base href="${fix(location)}" />\n${head}`
+			};
 			demoDiv.insertAdjacentHTML("afterend", `<form action="https://codepen.io/pen/define" method="POST" target="_blank" class="codepen">
 				<input type="hidden" name="data" value='${ JSON.stringify(options).replaceAll("'", "&apos;") }'>
 				<button>Open in <img src="/assets/codepen.svg" alt="CodePen"></button>
@@ -89,4 +70,13 @@ function clone (node){
 	}
 
 	return ret;
+}
+
+function fix (url) {
+	url = new URL(url, location);
+	if (url.host.startsWith("localhost")) {
+		url.host = "mavue.mavo.io:80";
+		url.protocol = "https:";
+	}
+	return url;
 }
