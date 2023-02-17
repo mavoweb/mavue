@@ -61,12 +61,14 @@ This imports every MaVue helper and adds it to `<v-app>`.
 
 ### Minimal hassle, some control
 
-To easily create (Ma)Vue apps in JS, you can import `createApp(spec, element)` and use it instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
+To easily create (Ma)Vue apps in JS, you can import `createApp(spec)` and use it instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
 which automatically includes all MaVue helpers.
 
 In addition to calling Vue’s `createApp()` and adding all the MaVue helpers, it also:
 - allows you to provide the initial data as an object, which can be helpful if you only need to provide static data
 - calls [`.mount()`](https://vuejs.org/guide/essentials/application.html#mounting-the-app) for you and returns the Vue instance.
+It uses either the second argument (e.g. `createApp({...}, "#myapp")`) or an `element` key in the app spec (e.g. `createApp({ element: "#myapp", ...})`),
+or even defaults to `#app` if nothing is provided and there is an element with id="app" on the page which doesn’t *already* have a Vue app on it.
 
 ```html
 <div id="app">
@@ -79,7 +81,7 @@ let app = createApp({
 	data: {
 		foo: 1
 	}
-}, "#app");
+});
 </script>
 ```
 
