@@ -15,6 +15,12 @@ Name expressions and use the result in other expressions, all from HTML!
 
 <main>
 
+## Limitations
+
+- Root level properties (e.g. `name="foo"` with no `:on`) are not reactive unless you initialize them in your initial data
+(the value doesn't matter, you could initialize them to `null` or `undefined`).
+If using `<v-app>`, it takes care of this for you.
+
 ## Examples
 
 Simple example, showing both a root-level property, and one scoped to a list item:

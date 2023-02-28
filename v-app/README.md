@@ -18,6 +18,8 @@ Make simple Vue apps by writing HTML
 
 - Automatically fetches Vue for you
 - `element.app` to access the app instance from JS
+- If using `<set-data>` as well, it automatically makes root-level properties reactive even if you do not initialize them
+<!-- - Preserves `value=""` (fixes [Vue bug #6277](https://github.com/vuejs/core/issues/6277)) -->
 
 
 ## Limitations

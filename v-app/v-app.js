@@ -20,6 +20,16 @@ class VApp extends HTMLElement {
 
 		let data = this.data ?? {};
 
+		// Register computed properties declared through <set-data>
+		for (let setData of this.querySelectorAll("set-data:not([\\:on], [v-bind\\:on])")) {
+			let key = setData.getAttribute("name");
+			if (!(key in data)) {
+				data[key] = undefined;
+			}
+		}
+
+		this.data = data;
+
 		this.app = Vue.createApp({
 			data() {
 				return data;
