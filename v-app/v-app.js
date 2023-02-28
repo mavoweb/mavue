@@ -4,8 +4,19 @@ import { register } from "../src/util.js";
 class VApp extends HTMLElement {
 	constructor() {
 		super();
+	}
 
-		this.attributeChangedCallback();
+	connectedCallback() {
+		if (this.app) {
+			return;
+		}
+
+		try {
+			this.data = JSON.parse(this.getAttribute("data"));
+		}
+		catch (e) {
+			console.warn(`Invalid JSON in v-app data attribute: ${e.message}`);
+		}
 
 		let data = this.data ?? {};
 
@@ -19,23 +30,7 @@ class VApp extends HTMLElement {
 
 			directives: Object.assign({}, this.directives, VApp.directives),
 			components: Object.assign({}, this.components, VApp.components),
-		}).mount(this)
-	}
-
-	static observedAttributes = ["data"];
-
-	attributeChangedCallback(name, oldValue, newValue) {
-		if (oldValue !== undefined && oldValue === newValue) return;
-
-		if (!name || name === "data") {
-			try {
-				this.data = JSON.parse(this.getAttribute("data"));
-				// TODO do something with this.data
-			}
-			catch (e) {
-				console.warn(`Invalid JSON in v-app data attribute: ${e.message}`);
-			}
-		}
+		}).mount(this);
 	}
 
 	/**
