@@ -107,8 +107,8 @@ You could also add computed properties, e.g. to compute things or expose specifi
 
 ```html
 <v-app id="url_demo" data='{"relative": "../v-default/", "base": ""}'>
-	<label>Relative URL: <input v-model="relative" /></span>
-	<label>Base: <input v-model="base" /></span>
+	<label>Relative URL: <input v-model="relative" /></label>
+	<label>Base: <input v-model="base" /></label>
 	<output v-if="!/\w+:/.test(base)">
 		Resolved base: <a :href="absoluteBase">{{ absoluteBase }}</a>
 	</output>
