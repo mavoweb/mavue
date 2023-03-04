@@ -79,6 +79,20 @@ dates_demo.computed = {
 
 Note that using the `once` attribute does not prevent you from manually setting the data to another value later.
 
+`<set-data>` works with `v-if` and `v-else` too,
+allowing you to set data conditionally:
+
+```html
+<v-app data='{"checked": true, "if_checked_1": null}'>
+	<input type="checkbox" v-model="checked">
+	<set-data name="if_checked_1" value="1" v-if="checked"></set-data>
+	<set-data name="if_checked_1" value="2" v-else></set-data>
+	<mark>{{ if_checked_1 }}</mark>
+</v-app>
+```
+
+## ⚠️ Order of operations
+
 While `<set-data>` is primarily useful for computing expressions,
 it can sometimes be useful for static values.
 
@@ -88,6 +102,7 @@ e.g. this produces an error when you click "Add window" due to `win.size` not ex
 ```html
 <v-app id="win_size" data='{"windows": []}'>
 	<article v-for="win in windows">
+		<!-- This does not work as you'd expect -->
 		<set-data name="size" :on="win" :value="{width: 0, height: 0}" once></set-data>
 
 		<input type="number" v-model="win.size.width" />
@@ -110,17 +125,6 @@ Do *not* depend on `<set-data>`’s assignment happening before other parts of y
 Do *not* use large objects in `:value`, as it can be quite slow.
 
 </div>
-
-TBD describe this
-
-```html
-<v-app data='{"checked": true, "if_checked_1": null}'>
-	<input type="checkbox" v-model="checked">
-	<set-data name="if_checked_1" value="1" v-if="checked"></set-data>
-	<set-data name="if_checked_1" value="2" v-else></set-data>
-	<mark>{{ if_checked_1 }}</mark>
-</v-app>
-```
 
 </main>
 
