@@ -1,4 +1,4 @@
-import { Vue, mixin } from "./index.js";
+import { Vue, mixin } from "../src/index.js";
 
 /**
  * Create and mount a Vue app
@@ -17,7 +17,7 @@ export default function createApp(spec, element = spec.element) {
 
 	let app = Vue.createApp(spec);
 
-	if (!element && typeof document !== "undefined") {
+	if (!element && element !== false && typeof document !== "undefined") {
 		// If there’s an element with id "app"…
 		let candidate = document.getElementById("app");
 
@@ -29,7 +29,10 @@ export default function createApp(spec, element = spec.element) {
 	}
 
 	if (!element) {
-		console.warn("No element to mount app on. Call .mount() on the result of createApp() or pass in an element parameter");
+		if (element !== false) {
+			console.warn("[MaVue.createApp] No element to mount app on. Call .mount() on the result of createApp() or pass in an element parameter. Set element: false to mute this warning.");
+		}
+
 		return app;
 	}
 

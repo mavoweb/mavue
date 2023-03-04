@@ -1,0 +1,67 @@
+---
+id: create-app
+title: createApp()
+---
+
+<header>
+
+# `createApp()`
+
+Create Vue apps with less JS
+
+</header>
+
+<main>
+
+## Features
+
+- API largely compatible with [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
+- Automatically fetches Vue for you
+- Automatically imports all MaVue helpers
+- Initialize & mount your app with less (or no!) code
+
+## Differences from Vue’s `createApp()`
+
+- **`data`**: Value can be an object, which can be helpful if you only need to provide static data.
+The `data` key can even be missing, in which case it defaults to an empty object (`{}`).
+- **`element`**: Specify the element to [mount](https://vuejs.org/guide/essentials/application.html#mounting-the-app) the app on.
+If not provided, it defaults to `#app` if there is an element with `id="app"` on the page which doesn’t *already* have a Vue app mounted on it.
+Use `element: false` to disable.
+
+{% raw %}
+
+## Examples
+
+```html
+<div id="app">
+	<input type=number v-model=foo> + 1 = {{ foo + 1 }}
+</div>
+<script type="module">
+import { createApp } from "https://mavue.mavo.io/mavue.js";
+
+let app = createApp({
+	data: {
+		foo: 1
+	}
+});
+</script>
+```
+
+## Installation
+
+You can import `createApp()` either from the main MaVue file, or from the `create-app` subdirectory.
+
+```js
+// Named import
+import { createApp } from "https://mavue.mavo.io/mavue.js";
+```
+
+```js
+// Notice here it's a default import
+import createApp from "https://mavue.mavo.io/create-app/index.js";
+```
+
+{% endraw %}
+
+</main>
+

@@ -26,15 +26,21 @@ With MaVue, we want to bridge this gap, and offer developers of all skill levels
 **Here be dragons** MaVue has not yet been officially released,
 nor is the list of helpers below complete.
 It is very much a work in progress.
-Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) as you find them!
+Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues) as you find them!
 
 </div>
 
 ## MaVue helpers
 
-### Current
+### App creation
+
+These helpers import all of MaVue and offer easier ways to create Vue apps.
 
 - [`<v-app>`](./v-app/): Make Vue apps by writing HTML
+- [`createApp()`](./create-app/): Create Vue apps with less JS
+
+### Current
+
 - [`<ma-data>`](./ma-data/): Data storage and authentication, using [Madata](https://madata.dev)
 - [`<set-data>`](./set-data/): Name expressions and use the result in other expressions
 - [`v-default`](./v-default/): Provide default values for `v-model`
@@ -61,14 +67,12 @@ This imports every MaVue helper and adds it to `<v-app>`.
 
 ### Minimal hassle, some control
 
-To easily create (Ma)Vue apps in JS, you can import `createApp(spec)` and use it instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html)
-which automatically includes all MaVue helpers.
+To easily create (Ma)Vue apps in JS, you can import [`createApp()`](./create-app/) and use it
+instead of [Vue’s `createApp()`](https://vuejs.org/guide/essentials/application.html).
 
-In addition to calling Vue’s `createApp()` and adding all the MaVue helpers, it also:
-- allows you to provide the initial data as an object, which can be helpful if you only need to provide static data
-- calls [`.mount()`](https://vuejs.org/guide/essentials/application.html#mounting-the-app) for you and returns the Vue instance.
-It uses either the second argument (e.g. `createApp({...}, "#myapp")`) or an `element` key in the app spec (e.g. `createApp({ element: "#myapp", ...})`),
-or even defaults to `#app` if nothing is provided and there is an element with id="app" on the page which doesn’t *already* have a Vue app on it.
+It imports Vue for you, adds all the MaVue helpers,
+and includes some additional conveniences so you can create apps with less code.
+
 
 ```html
 <div id="app">
@@ -87,7 +91,7 @@ let app = createApp({
 
 ### Some hassle, more control
 
-You can also import all of MaVue on Vue apps you create in your JS, as a mixin,
+You can import all of MaVue on Vue apps you create in your JS, as a mixin,
 so you can use it with your own version of Vue
 
 ```js
