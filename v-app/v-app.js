@@ -1,5 +1,6 @@
 import * as Vue from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import { register } from "../src/util.js";
+import { fixupRoot as setDataFixupRoot } from "../set-data/set-data.js";
 
 class VApp extends HTMLElement {
 	constructor() {
@@ -21,12 +22,7 @@ class VApp extends HTMLElement {
 		let data = this.data ?? {};
 
 		// Register computed properties declared through <set-data>
-		for (let setData of this.querySelectorAll("set-data:not([\\:on], [v-bind\\:on])")) {
-			let key = setData.getAttribute("name");
-			if (!(key in data)) {
-				data[key] = undefined;
-			}
-		}
+		setDataFixupRoot(this, data);
 
 		this.data = data;
 

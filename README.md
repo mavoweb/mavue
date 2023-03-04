@@ -34,9 +34,10 @@ Please try it out, and [open issues](https://github.com/mavoweb/mavue/issues) as
 
 ### App creation
 
-These helpers import all of MaVue and offer easier ways to create Vue apps.
+These helpers import Vue automatically and offer easier ways to create Vue apps.
+See [Installation](#installation) below for an overview of the different ways to use MaVue.
 
-- [`<v-app>`](./v-app/): Make Vue apps by writing HTML
+- [`<v-app>`](./v-app/): Make simple Vue apps by writing HTML
 - [`createApp()`](./create-app/): Create Vue apps with less JS
 
 ### Current

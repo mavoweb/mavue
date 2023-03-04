@@ -72,6 +72,7 @@ const SetData = {
 	},
 
 	computed: {
+		// Root object our property is on
 		root () {
 			return this.on ?? this.$parent;
 		},
@@ -99,6 +100,17 @@ const SetData = {
 	},
 
 	template: `<slot><span :hidden="hidden">{{ isPrimitive(storedValue)? storedValue : "" }}</span></slot>`
+}
+
+// Make sure root properties in <set-data> become reactive
+// by registering them on intiial data
+export function fixupRoot (root, data) {
+	for (let setData of root.querySelectorAll("set-data:not([\\:on], [v-bind\\:on])")) {
+		let key = setData.getAttribute("name");
+		if (!(key in data)) {
+			data[key] = undefined;
+		}
+	}
 }
 
 function isPrimitive (value) {

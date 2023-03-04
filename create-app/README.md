@@ -19,8 +19,9 @@ Create Vue apps with less JS
 - Automatically fetches Vue for you
 - Automatically imports all MaVue helpers
 - Initialize & mount your app with less (or no!) code
+- If using [`<set-data>`](../set-data/) as well, it automatically makes root-level properties reactive even if you do not initialize them (requires `data` to be an object, see below)
 
-## Differences from Vue’s `createApp()`
+## Other differences from Vue’s `createApp()`
 
 - **`data`**: Value can be an object, which can be helpful if you only need to provide static data.
 The `data` key can even be missing, in which case it defaults to an empty object (`{}`).

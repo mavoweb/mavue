@@ -1,22 +1,17 @@
 import { Vue, mixin } from "../src/index.js";
+import { fixupRoot as setDataFixupRoot } from "../set-data/set-data.js";
 
 /**
  * Create and mount a Vue app
  * @param {Object} spec
  * @param {Element} [spec.element] The element to mount the app on. Defaults to `"#app"`
- * @param {Element} [element] The element to mount the app on.
+ * @param {Element} [element] The element to mount the app on. Deprecated, use `spec.element` instead.
 */
 export default function createApp(spec, element = spec.element) {
 	spec.mixins ??= [];
 	spec.mixins.push(mixin);
 
-	if (typeof spec.data !== "function") {
-		let data = spec.data;
-		spec.data = () => data;
-	}
-
-	let app = Vue.createApp(spec);
-
+	// Figure out root element
 	if (!element && element !== false && typeof document !== "undefined") {
 		// If there’s an element with id "app"…
 		let candidate = document.getElementById("app");
@@ -27,6 +22,19 @@ export default function createApp(spec, element = spec.element) {
 			element = candidate;
 		}
 	}
+
+	// Wrap data in a function as that's what Vue expects
+	if (typeof spec.data !== "function") {
+		let data = spec.data;
+
+		if (element) {
+			setDataFixupRoot(element, data);
+		}
+
+		spec.data = () => data;
+	}
+
+	let app = Vue.createApp(spec);
 
 	if (!element) {
 		if (element !== false) {
