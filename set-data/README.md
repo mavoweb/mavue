@@ -15,6 +15,10 @@ Name expressions and use the result in other expressions, all from HTML!
 
 <main>
 
+## Features
+
+- Unlike computed properties, you can use `<set-data>` to set "computed" properties inside `v-for` too
+
 ## Limitations
 
 - Root level properties (e.g. `name="foo"` with no `:on`) are not reactive unless you initialize them in your initial data
