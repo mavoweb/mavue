@@ -30,7 +30,7 @@ register(VApp, focusAll);
 register(mixin, focusAll);
 export {focus};
 
-import * as functions from "../functions/functions.js";
+import * as functions from "../functions/functions-fn.js";
 register(VApp, functions);
 register(mixin, functions);
 export {functions};
