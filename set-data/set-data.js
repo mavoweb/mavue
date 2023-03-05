@@ -99,7 +99,9 @@ const SetData = {
 		}
 	},
 
-	template: `<slot><span :hidden="hidden">{{ isPrimitive(storedValue)? storedValue : "" }}</span></slot>`
+	template: `<slot><span :hidden="hidden">{{ isPrimitive(storedValue)? storedValue : "" }}</span></slot>`,
+
+	fixupRoot,
 }
 
 // Make sure root properties in <set-data> become reactive
