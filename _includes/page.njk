@@ -13,12 +13,7 @@
 	<script src="mavue.js" type="module"></script>
 	{% else %}
 		<script src="../v-app/v-app.js" type="module"></script>
-		{% if type === "functions" %}
-		<script type="module">
-			import * as {{ id | CamelCase }} from "./{{ id }}.js";
-			VApp.registerHelper({{ id | CamelCase }});
-		</script>
-		{% elseif id != "v-app" %}
+		{% if id != "v-app" %}
 		<script src="{{ id }}.js" type="module"></script>
 		{% endif %}
 		{% if hasCSS %}
@@ -81,7 +76,7 @@
 			<p>If not using <code>&lt;v-app></code>, you can import the functions individually:
 
 			<pre class="language-js"><code>
-				import * as {{ id | CamelCase }} from "https://mavue.mavo.io/{{ id }}/{{ id }}.js";
+				import * as {{ id | CamelCase }} from "https://mavue.mavo.io/{{ id }}/{{ id }}-fn.js";
 
 				// Then use it in your VueJS app
 				createApp({
