@@ -157,3 +157,35 @@ export function count (...values) {
 
 	return count;
 }
+
+/**
+ * Get a URL param, either from the current URL or a custom URL
+ * URL params can be specified either as search params (e.g. ?id=123) or as path params (e.g. /id/123),
+ * with the former taking precedence.
+ * @param {string} id
+ * @param {string | URL} url
+ * @returns
+ */
+export function url (id, url = location) {
+	if (id === undefined) {
+		// url() signature
+		return location.href;
+	}
+
+	if (!id) {
+		return null;
+	}
+
+	// id = (id + "").replace(/[^\w-:]/g);
+
+	url = new URL(url, location);
+	let params = url.searchParams;
+
+	let ret = params.get(id) ?? url.pathname.match(RegExp(`(?:^|\\/)${id}\\/([^\\/]*)`))?.[0];
+
+	if (ret === null) {
+		return null;
+	}
+
+	return decodeURIComponent(ret ?? "");
+}

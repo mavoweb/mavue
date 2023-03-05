@@ -124,6 +124,13 @@ Calculate the average/median of one or more arrays of numbers.
 * [More `min()` examples](./tests/#min)
 * [More `max()` examples](./tests/#max)
 
+### url(param [, base])
+
+Get a URL param, either from the URL path, or from the query string.
+
+```html
+```
+
 </main>
 
 {% endraw %}
