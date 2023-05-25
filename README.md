@@ -109,6 +109,22 @@ let app = createApp({
 If you only need a few helpers, you can import them individually,
 following the instructions on their individual pages.
 
+## FAQ
+
+### How to use a different version/distribution of Vue?
+
+MaVue by default uses the development version of the latest Vue 3 release for browsers.
+
+You can use a different version of Vue this way:
+
+```js
+import * as Vue from "vue";
+import { setVue } from "https://mavue.mavo.io/src/vue.js";
+setVue(Vue);
+```
+
+This code should run before any MaVue code.
+
 {% endraw %}
 
 </main>

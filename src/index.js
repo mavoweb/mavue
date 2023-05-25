@@ -2,8 +2,12 @@
  * Full service: This imports absolutely everything
  */
 
-import VApp, {Vue} from "../v-app/v-app.js";
-export {VApp, Vue};
+import { getVue } from "./vue.js";
+let Vue = await getVue();
+export {Vue}
+
+import VApp from "../v-app/v-app.js";
+export {VApp};
 
 import { register } from "./util.js";
 export { register };

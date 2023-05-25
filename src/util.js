@@ -38,3 +38,25 @@ export function register(app, ...helpers) {
 		}
 	}
 }
+
+/**
+ * Return a promise that resolves after the specified timeout
+ * @param {number} timeout
+ * @param {AbortSignal} [signal] Abort signal to cancel the delay (the promise then never resolves)
+ * @returns {Promise<void>}
+ */
+export function delay (timeout, { signal } = {}) {
+	return new Promise((resolve, reject) => {
+		let id = setTimeout(() => {
+			if (!signal || !signal.aborted) {
+				resolve();
+			}
+		}, timeout);
+
+		if (signal) {
+			signal.addEventListener("abort", () => {
+				clearTimeout(id);
+			});
+		}
+	});
+}

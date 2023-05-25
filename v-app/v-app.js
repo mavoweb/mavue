@@ -1,5 +1,7 @@
-import * as Vue from "https://cdn.jsdelivr.net/npm/vue@3/dist/vue.esm-browser.js";
+import { getVue } from "../src/vue.js";
 import { register } from "../src/util.js";
+
+let Vue = await getVue();
 
 class VApp extends HTMLElement {
 	constructor() {
