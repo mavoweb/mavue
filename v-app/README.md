@@ -25,6 +25,9 @@ Make simple Vue apps by writing HTML
 ## Limitations
 
 - Attribute `data` only sets the initial data and never gets updated. `element.data` only contains the initial data.
+- Attribute `globals` is only read at the time of app creation.
+You cannot expose more globals later by simply updating the attribute.
+However, if the value of the globals changes, it will be picked up.
 
 ## Examples
 
@@ -62,6 +65,16 @@ Lists:
 		<input v-model="item.foo"> {{ item.foo }}
 	</article>
 	<button @click="list.push({foo: list.length + 1})">Add item</button>
+</v-app>
+```
+
+Expose globals:
+
+```html
+<v-app data='{"foo": 2}' globals="Math, console, alert">
+	<input type="number" v-model="foo" />
+	sqrt({{ foo }}) = {{ Math.sqrt(foo) }}
+	<button	@click="alert(foo++)">alert(foo++)</button>
 </v-app>
 ```
 

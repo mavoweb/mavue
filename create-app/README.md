@@ -28,6 +28,7 @@ The `data` key can even be missing, in which case it defaults to an empty object
 - **`element`**: Specify the element to [mount](https://vuejs.org/guide/essentials/application.html#mounting-the-app) the app on.
 If not provided, it defaults to `#app` if there is an element with `id="app"` on the page which doesn’t *already* have a Vue app mounted on it.
 Use `element: false` to disable.
+- **`globals`**: Expose certain globals to the template. Any globals specified as strings will update dynamically if they change.
 
 {% raw %}
 
@@ -44,6 +45,27 @@ let app = createApp({
 	data: {
 		foo: 1
 	}
+});
+</script>
+```
+
+Using `element` and `globals` options:
+
+```html
+<div id="app2">
+	<button @click="alert(foo++)">alert(foo++)</button>
+	<button @click="console.log(foo++)">console.log(foo--)</button>
+	{{ Math.round(foo * 10 / 3)/10 }}
+</div>
+<script type="module">
+import { createApp } from "https://mavue.mavo.io/mavue.js";
+
+let app = createApp({
+	element: "#app2",
+	data: {
+		foo: 1
+	},
+	globals: [console, alert, "Math"]
 });
 </script>
 ```

@@ -25,12 +25,28 @@ class VApp extends HTMLElement {
 
 		this.data = data;
 
+		let computed = this.computed ?? {};
+
+		if (this.hasAttribute("globals")) {
+			this.globals = this.getAttribute("globals").split(/,\s*/);
+			Object.assign(computed, Object.fromEntries(this.globals.map(global => {
+				let value = () => window[global];
+
+				// Global functions can produce errors if called with a different context
+				if (typeof window[global] === "function") {
+					value = () => window[global].bind(window);
+				}
+
+				return [global, value];
+			})));
+		}
+
 		this.app = Vue.createApp({
 			data() {
 				return data;
 			},
 
-			computed: this.computed,
+			computed,
 			methods: Object.assign(this.methods ?? {}, VApp.methods),
 
 			directives: Object.assign({}, this.directives, VApp.directives),
