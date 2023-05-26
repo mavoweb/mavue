@@ -34,22 +34,21 @@ export default function createApp(spec, element = spec.element) {
 		spec.data = () => data;
 	}
 
-	// Any globals to expose?
-	if (spec.globals?.length > 0) {
-		for (let global of spec.globals) {
-			if (typeof global === "function") {
+	// Any variables to expose?
+	if (spec.expose) {
+		for (let key in spec.expose) {
+			let value = spec.expose[key];
+
+			if (typeof value === "function") {
 				spec.methods ??= {};
 				// Global functions can produce errors if called with a different context
-				spec.methods[global.name] = global.bind(window);
+				// and globalThis is a reasonable default context anyway
+				spec.methods[key] = value.bind(globalThis);
 			}
 			else {
 				spec.computed ??= {};
-				spec.computed[global] = typeof global === "string" ? () => {
-					let ret = window[global];
-					return typeof ret === "function" ? ret.bind(window) : ret;
-				} : () => global;
+				spec.computed[key] = () => value;
 			}
-
 		}
 	}
 
