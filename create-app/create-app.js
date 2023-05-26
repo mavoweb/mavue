@@ -43,7 +43,8 @@ export default function createApp(spec, element = spec.element) {
 				spec.methods ??= {};
 				// Global functions can produce errors if called with a different context
 				// and globalThis is a reasonable default context anyway
-				spec.methods[key] = value.bind(globalThis);
+				let isConstructor = !!value.prototype && value.prototype.constructor === value;
+				spec.methods[key] = isConstructor? value : value.bind(globalThis);
 			}
 			else {
 				spec.computed ??= {};
