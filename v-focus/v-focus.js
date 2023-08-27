@@ -1,6 +1,11 @@
 const focus = {
 	mounted(el, binding, vnode, prevVnode) {
-		el.focus();
+		// If v-focus is used without a value, we just focus when mounted
+		// However, if it's used with a value, and the value is falsy, we don't focus,
+		// because this is used for conditional focusing
+		if (binding.value === undefined || binding.value) {
+			el.focus();
+		}
 	},
 
 	updated(el, binding, vnode, prevVnode) {

@@ -1,8 +1,8 @@
 {
-  "name": "nudeui",
-  "version": "1.0.0",
+  "name": "mavue",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.html",
+  "main": "./mavue.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx postcss \"**/*.postcss\" --base . --dir . --ext .css --config postcss.config.cjs",
@@ -18,8 +18,7 @@
     "url": "git+https://github.com/mavoweb/mavue.git"
   },
   "keywords": [
-    "CSS",
-    "forms"
+
   ],
   "author": "Lea Verou",
   "license": "MIT",

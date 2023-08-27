@@ -35,13 +35,20 @@ Basic usage, element is focused when inserted:
 You can also set focusabiity based on a data value.
 When the data value becomes truthy, the element will be focused.
 When the data value becomes falsy, it will be unfocused (if it's focused).
+Look at how easy this makes complex focus management:
 
 ```html
 <v-app data='{"list":[{}]}'>
 	<article v-for="(item, i) in list">
 		<input v-model="item.text" v-focus="item.active"
-		       @keyup.enter="list.push({active: true})">
-		<button @click="list.splice(i, 1); list[i-1].active = true">x</button>
+		       @keyup.enter="list.push({active: true})"
+			   @focus="item.active = true"
+			   @blur="item.active = false"
+			   @keyup.backspace="list.splice(i, 1); (list[i-1] ?? list[i + 1] ?? {}).active = true"
+			   @keyup.arrow-up="(list[i-1] ?? list[list.length - 1]).active = true"
+			   @keyup.arrow-down="(list[i+1] ?? list[0]).active = true"
+			   >
+		<button @click="list.splice(i, 1); (list[i-1] ?? list[i + 1] ?? {}).active = true">x</button>
 	</article>
 
 	<button @click="list.push({active: true})">Add item</button>
