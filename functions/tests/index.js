@@ -1,4 +1,4 @@
-import * as Functions from "../functions.js";
+import { default as Functions } from "../functions.js";
 
 // Remove indents from <td> to make for nice presentation
 for (let td of document.querySelectorAll("td")) {
